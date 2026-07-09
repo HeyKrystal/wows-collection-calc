@@ -78,6 +78,33 @@ h1 {
     margin: 6px 0 0 0;
 }
 
+.hero-icon {
+    width: 72px;
+    height: 72px;
+
+    transition:
+        transform .2s ease,
+        filter .2s ease;
+}
+
+.hero-icon:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,.25));
+}
+
+@media (max-width: 600px) {
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-icon {
+        width: 64px;
+        height: 64px;
+    }
+}
+
 .notice {
     background: rgba(192, 77, 0, 0.85);
     border: 1px solid rgba(56, 189, 248, 0.35);
