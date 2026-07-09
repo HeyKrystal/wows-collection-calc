@@ -6,20 +6,44 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>WoWS Collection Calc</title>
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Standard -->
+    <title>World of Warships Collection Calc</title>
+
+    <meta name="description"
+        content="Estimate the number of containers needed to complete a collection.">
+
+    <!-- Open Graph (Discord, Facebook, LinkedIn, Teams, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="World of Warships Collection Calc">
+    <meta property="og:description" content="Estimate the number of containers needed to complete a collection. Calc is short for calculator; I'm just using slang guys.">
+    <meta property="og:image" content="https://heykrystal.github.io/wows-collection-calc/images/social-preview.png">
+    <meta property="og:url" content="https://heykrystal.github.io/wows-collection-calc/">
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="World of Warships Collection Calc">
+    <meta name="twitter:description" content="Estimate the number of containers needed to complete a collection. Calc is short for calculator; I'm just using slang guys.">
+    <meta name="twitter:image" content="https://heykrystal.github.io/wows-collection-calc/images/social-preview.png">
 </head>
 
 <body>
     <main>
-
         <div class="wide-layout">
-
-
             <section class="card">
-                <h1>World of Warships Collection Calc</h1>
-                <p class="subtitle">
-                    Estimate how many containers you need to complete a collection.
-                    <br>Calc is short for calculator; I'm just using slang guys.
-                </p>
+                <header class="hero">
+                    <img src="images/logo-wows-collection-calc.png" alt="World of Warships Collection Calculator"
+                        class="hero-icon">
+
+                    <div class="hero-text">
+                        <h1>World of Warships Collection Calc</h1>
+
+                        <p>
+                            Estimate how many containers you need to complete a collection.
+                            <br>Calc is short for calculator; I'm just using slang guys.
+                        </p>
+                    </div>
+                </header>
             </section>
         </div>
 
@@ -30,7 +54,9 @@
 
             <ul>
                 <li>Keep in mind these are merely estimates intended to provide a general expected cost.
-                <br>It is still recommended to acquire containers slowly up to the estimate to avoid over-purchasing.</li>
+                    <br>It is still recommended to acquire containers slowly up to the estimate to avoid
+                    over-purchasing.
+                </li>
                 <li>Calculator assumes you will save collection tokens until there are enough to finish the collection.
                 </li>
             </ul>
@@ -151,29 +177,29 @@
                         <summary>Extra Stats for Nerds</summary>
 
                         <div class="details-body">
-                        <div class="small-stats">
+                            <div class="small-stats">
 
-                            <div class="result-box">
-                                <div class="result-label">Best Case Scenario</div>
-                                <div id="bestCaseContainers" class="result-value">-</div>
-                                <div class="explanation">If every pull is a missing element.</div>
+                                <div class="result-box">
+                                    <div class="result-label">Best Case Scenario</div>
+                                    <div id="bestCaseContainers" class="result-value">-</div>
+                                    <div class="explanation">If every pull is a missing element.</div>
+                                </div>
+
+                                <div class="result-box">
+                                    <div class="result-label">Worst Case Scenario</div>
+                                    <div id="worstCaseContainers" class="result-value">-</div>
+                                    <div class="explanation">If every remaining pull is a duplicate.</div>
+                                </div>
+
+                                <div class="result-box">
+                                    <div class="result-label">Average</div>
+                                    <div id="averageContainers" class="result-value">-</div>
+                                    <div class="explanation">Average containers needed.</div>
+                                </div>
                             </div>
 
-                            <div class="result-box">
-                                <div class="result-label">Worst Case Scenario</div>
-                                <div id="worstCaseContainers" class="result-value">-</div>
-                                <div class="explanation">If every remaining pull is a duplicate.</div>
-                            </div>
-
-                            <div class="result-box">
-                                <div class="result-label">Average</div>
-                                <div id="averageContainers" class="result-value">-</div>
-                                <div class="explanation">Average containers needed.</div>
-                            </div>
-                        </div>
-
-                        <div class="explanation" id="summaryText"></div>
-                        <div class="explanation" id="simulationTime" style="font-size: 0.8rem; opacity: 0.8;"></div>
+                            <div class="explanation" id="summaryText"></div>
+                            <div class="explanation" id="simulationTime" style="font-size: 0.8rem; opacity: 0.8;"></div>
                         </div>
                     </details>
                 </div>
