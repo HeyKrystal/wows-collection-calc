@@ -18,7 +18,7 @@
                 <h1>World of Warships Collection Calc</h1>
                 <p class="subtitle">
                     Estimate how many containers you need to complete a collection.
-                    </br>Calc is short for calculator; I'm just using slang guys.
+                    <br>Calc is short for calculator; I'm just using slang guys.
                 </p>
             </section>
         </div>
@@ -30,7 +30,7 @@
 
             <ul>
                 <li>Keep in mind these are merely estimates intended to provide a general expected cost.
-                </br>It is still reccomended to acquire containers slowly up to the estimate to avoid over purchasing.</li>
+                <br>It is still recommended to acquire containers slowly up to the estimate to avoid over-purchasing.</li>
                 <li>Calculator assumes you will save collection tokens until there are enough to finish the collection.
                 </li>
             </ul>
@@ -110,7 +110,7 @@
                         </div>
                     </div>
 
-                    <button type="submit">Calculate Estimate</button>
+                    <button id="calculateButton" class="primary-button" type="submit">Calculate Estimate</button>
                     <div id="errorBox" class="error"></div>
                 </form>
             </section>
@@ -147,9 +147,10 @@
                         </div>
                     </div>
 
-                    <details open class="advanced-results">
+                    <details class="advanced-results">
                         <summary>Extra Stats for Nerds</summary>
 
+                        <div class="details-body">
                         <div class="small-stats">
 
                             <div class="result-box">
@@ -173,6 +174,7 @@
 
                         <div class="explanation" id="summaryText"></div>
                         <div class="explanation" id="simulationTime" style="font-size: 0.8rem; opacity: 0.8;"></div>
+                        </div>
                     </details>
                 </div>
 

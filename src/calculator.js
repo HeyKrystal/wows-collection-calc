@@ -7,13 +7,21 @@
     How many simulated completions to run each time the button is clicked.
     Higher = smoother estimates, but slower.
 
-  EXPECTED_RANGE_LOW_PERCENTILE:
+  VERY_LUCKY_PERCENTILE:
+    Very lucky container value.
+    5 means "5 out of 100 simulated players finished by this many containers."
+
+  TYPICAL_PERCENTILE:
     Lower end of the displayed Expected Containers range.
     50 means "half of simulated players finished by this many containers."
 
-  EXPECTED_RANGE_HIGH_PERCENTILE:
-    Upper end of the displayed Expected Containers range.
-    90 means "9 out of 10 simulated players finished by this many containers."
+  CONSERVATIVE_PERCENTILE:
+    Upper end of the displayed expected Containers range.
+    90 means "8 out of 10 simulated players finished by this many containers."
+
+  VERY_UNLUCKY_PERCENTILE:
+    Very unlucky container value.
+    95 means "95 out of 100 simulated players finished by this many containers."
 
   MAX_COLLECTION_SIZE:
     Prevents users from entering huge collection sizes that could make the calculator sluggish.

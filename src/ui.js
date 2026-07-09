@@ -12,11 +12,14 @@ const errorBox = document.getElementById("errorBox");
 const results = document.getElementById("results");
 const emptyState = document.getElementById("emptyState");
 
-document
-    .getElementById("dismissNotice")
-    .addEventListener("click", () => {
-        document.getElementById("notice").classList.add("dismissed");
+const notice = document.getElementById("notice");
+const dismissNotice = document.getElementById("dismissNotice");
+
+if (notice && dismissNotice) {
+    dismissNotice.addEventListener("click", () => {
+        notice.classList.add("dismissed");
     });
+}
 
 function getInt(id) {
     return Number(document.getElementById(id).value);
@@ -25,8 +28,17 @@ function getInt(id) {
 function showError(message) {
     errorBox.textContent = message;
     errorBox.style.display = "block";
+    results.classList.remove("results-visible");
     results.classList.add("hidden");
     emptyState.classList.remove("hidden");
+}
+
+function showResults() {
+    results.classList.remove("hidden");
+
+    requestAnimationFrame(() => {
+        results.classList.add("results-visible");
+    });
 }
 
 function clearError() {
@@ -38,7 +50,7 @@ function formatNumber(value) {
     return new Intl.NumberFormat().format(value);
 }
 
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", async function (event) {
     event.preventDefault();
     clearError();
 
@@ -75,6 +87,7 @@ form.addEventListener("submit", function (event) {
 
     config.collectionTokens = normalized.tokens;
     config.duplicates = normalized.duplicates;
+
 
     const simulationStart = performance.now();
     const stats = runSimulation(config);
@@ -116,5 +129,6 @@ form.addEventListener("submit", function (event) {
 
 
     emptyState.classList.add("hidden");
-    results.classList.remove("hidden");
+    showResults();
+
 });
