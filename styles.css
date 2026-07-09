@@ -15,10 +15,14 @@
     box-sizing: border-box;
 }
 
+html {
+    background: #020617;
+}
+
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg, #020617, #0f172a);
+    background: linear-gradient(135deg, #7ea5c7, #2f3f63);
     background-image: url('https://images.unsplash.com/photo-1708342421457-9c59f4843fe1?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-size: cover;
     color: var(--text);
@@ -30,7 +34,6 @@ body {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 main {
