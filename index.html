@@ -10,20 +10,21 @@
     <!-- Standard -->
     <title>World of Warships Collection Calc</title>
 
-    <meta name="description"
-        content="Estimate the number of containers needed to complete a collection.">
+    <meta name="description" content="Estimate the number of containers needed to complete a collection.">
 
     <!-- Open Graph (Discord, Facebook, LinkedIn, Teams, etc.) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="World of Warships Collection Calc">
-    <meta property="og:description" content="Estimate the number of containers needed to complete a collection. Calc is short for calculator; I'm just using slang guys.">
+    <meta property="og:description"
+        content="Estimate the number of containers needed to complete a collection. Calc is short for calculator; I'm just using slang guys.">
     <meta property="og:image" content="https://heykrystal.github.io/wows-collection-calc/images/social-preview.png">
     <meta property="og:url" content="https://heykrystal.github.io/wows-collection-calc/">
 
     <!-- Twitter/X -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="World of Warships Collection Calc">
-    <meta name="twitter:description" content="Estimate the number of containers needed to complete a collection. Calc is short for calculator; I'm just using slang guys.">
+    <meta name="twitter:description"
+        content="Estimate the number of containers needed to complete a collection. Calc is short for calculator; I'm just using slang guys.">
     <meta name="twitter:image" content="https://heykrystal.github.io/wows-collection-calc/images/social-preview.png">
 </head>
 
@@ -146,7 +147,7 @@
 
                 <div id="results" class="results hidden">
                     <div class="result-box">
-                        <div class="result-label">Expected Containers</div>
+                        <div class="result-label">Expected Containers Needed</div>
                         <div id="expectedRange" class="result-value primary">-</div>
                         <div class="explanation">
                             Most players will finish somewhere within this range.
@@ -154,7 +155,7 @@
                         </div>
                     </div>
 
-                    <div id="costBox" class="result-box hidden">
+                    <div id="costBox" class="result-box cost">
                         <div class="result-label">Expected Cost Range</div>
                         <div id="totalCost" class="result-value">-</div>
                     </div>
@@ -162,13 +163,15 @@
                     <div class="small-stats">
                         <div class="result-box">
                             <div class="result-label">Very Lucky</div>
-                            <div id="veryLuckyContainers" class="result-value">—</div>
+                            <div id="luckyContainers" class="result-value">-</div>
+                            <div id="luckyCost" class="small-result-value cost">-</div>
                             <div class="explanation">Only about 5% of players finish this early.</div>
                         </div>
 
                         <div class="result-box">
                             <div class="result-label">Very Unlucky</div>
-                            <div id="veryUnluckyContainers" class="result-value">—</div>
+                            <div id="unluckyContainers" class="result-value">-</div>
+                            <div id="unluckyCost" class="small-result-value cost">-</div>
                             <div class="explanation">Only about 5% of players need more containers than this.</div>
                         </div>
                     </div>
@@ -182,18 +185,21 @@
                                 <div class="result-box">
                                     <div class="result-label">Best Case Scenario</div>
                                     <div id="bestCaseContainers" class="result-value">-</div>
+                                    <div id="bestCaseCost" class="small-result-value cost">-</div>
                                     <div class="explanation">If every pull is a missing element.</div>
                                 </div>
 
                                 <div class="result-box">
                                     <div class="result-label">Worst Case Scenario</div>
                                     <div id="worstCaseContainers" class="result-value">-</div>
+                                    <div id="worstCaseCost" class="small-result-value cost">-</div>
                                     <div class="explanation">If every remaining pull is a duplicate.</div>
                                 </div>
 
                                 <div class="result-box">
                                     <div class="result-label">Average</div>
                                     <div id="averageContainers" class="result-value">-</div>
+                                    <div id="averageCost" class="small-result-value cost">-</div>
                                     <div class="explanation">Average containers needed.</div>
                                 </div>
                             </div>

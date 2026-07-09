@@ -114,7 +114,9 @@ export function runSimulation(config) {
         lucky: percentile(results, CONSTANTS.VERY_LUCKY_PERCENTILE),
         typical: percentile(results, CONSTANTS.TYPICAL_PERCENTILE),
         conservative: percentile(results, CONSTANTS.CONSERVATIVE_PERCENTILE),
-        unlucky: percentile(results, CONSTANTS.VERY_UNLUCKY_PERCENTILE)
+        unlucky: percentile(results, CONSTANTS.VERY_UNLUCKY_PERCENTILE),
+        bestCase: calculateBestCase(config),
+        worstCase: calculateWorstCase(config)
     };
 }
 

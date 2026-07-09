@@ -101,8 +101,8 @@ form.addEventListener("submit", async function (event) {
         `${formatNumber(stats.typical)} – ${formatNumber(stats.conservative)}`;
 
     document.getElementById("averageContainers").textContent = stats.average.toFixed(2);
-    document.getElementById("veryLuckyContainers").textContent = formatNumber(stats.lucky);
-    document.getElementById("veryUnluckyContainers").textContent = formatNumber(stats.unlucky);
+    document.getElementById("luckyContainers").textContent = formatNumber(stats.lucky);
+    document.getElementById("unluckyContainers").textContent = formatNumber(stats.unlucky);
     document.getElementById("bestCaseContainers").textContent = formatNumber(bestCase);
     document.getElementById("worstCaseContainers").textContent = formatNumber(worstCase);
 
@@ -110,14 +110,36 @@ form.addEventListener("submit", async function (event) {
 
     if (containerCost !== null) {
         const currency = document.getElementById("currency").value;
+        const luckyCost = stats.lucky * containerCost;
+        const unluckyCost = stats.unlucky * containerCost;
         const typicalCost = stats.typical * containerCost;
         const conservativeCost = stats.conservative * containerCost;
+        const bestCaseCost = stats.bestCase * containerCost;
+        const worstCaseCost = stats.worstCase * containerCost;
+        const averageCost = stats.average * containerCost;
 
         document.getElementById("totalCost").textContent =
             `${formatNumber(typicalCost)} – ${formatNumber(conservativeCost)} ${currency}`;
-        costBox.classList.remove("hidden");
+        document.getElementById("luckyCost").textContent =
+            `${formatNumber(luckyCost)} ${currency}`;
+        document.getElementById("unluckyCost").textContent =
+            `${formatNumber(unluckyCost)} ${currency}`;
+        document.getElementById("bestCaseCost").textContent =
+            `${formatNumber(bestCaseCost)} ${currency}`;
+        document.getElementById("worstCaseCost").textContent =
+            `${formatNumber(worstCaseCost)} ${currency}`;
+        document.getElementById("averageCost").textContent =
+            `${formatNumber(averageCost)} ${currency}`;
+
+        const elements = [...document.getElementsByClassName('cost')];
+        elements.forEach((element) => {
+            element.classList.remove("hidden");
+        });
     } else {
-        costBox.classList.add("hidden");
+        const elements = [...document.getElementsByClassName('cost')];
+        elements.forEach((element) => {
+            element.classList.add("hidden");
+        });
     }
 
     document.getElementById("summaryText").textContent =
