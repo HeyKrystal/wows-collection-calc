@@ -17,7 +17,7 @@
 
   CONSERVATIVE_PERCENTILE:
     Upper end of the displayed expected Containers range.
-    90 means "8 out of 10 simulated players finished by this many containers."
+    80 means "8 out of 10 simulated players finished by this many containers."
 
   VERY_UNLUCKY_PERCENTILE:
     Very unlucky container value.
@@ -44,9 +44,26 @@ export const CONSTANTS = {
     MAX_DUPLICATE_RATE: 1000
 };
 
-function percentile(sortedValues, percent) {
-    const index = Math.ceil((percent / 100) * sortedValues.length) - 1;
-    return sortedValues[Math.max(0, Math.min(index, sortedValues.length - 1))];
+export function runSimulation(config) {
+    const results = [];
+
+    for (let i = 0; i < config.simulations; i++) {
+        results.push(simulateOneRun(config));
+    }
+
+    results.sort((a, b) => a - b);
+
+    const sum = results.reduce((total, value) => total + value, 0);
+
+    return {
+        lucky: percentile(results, CONSTANTS.VERY_LUCKY_PERCENTILE),
+        typical: percentile(results, CONSTANTS.TYPICAL_PERCENTILE),
+        conservative: percentile(results, CONSTANTS.CONSERVATIVE_PERCENTILE),
+        unlucky: percentile(results, CONSTANTS.VERY_UNLUCKY_PERCENTILE),
+        bestCase: calculateBestCase(config),
+        worstCase: calculateWorstCase(config),
+        average: sum / results.length
+    };
 }
 
 export function normalizeStartingTokens(tokens, duplicates, duplicateRate) {
@@ -58,10 +75,36 @@ export function normalizeStartingTokens(tokens, duplicates, duplicateRate) {
     };
 }
 
+export function validateConfig(config) {
+    if (!Number.isInteger(config.collectionSize) || config.collectionSize < 1 || config.collectionSize > CONSTANTS.MAX_COLLECTION_SIZE) {
+        return `Collection Size must be between 1 and ${CONSTANTS.MAX_COLLECTION_SIZE}.`;
+    }
 
-function canFinish(collectionSize, owned, tokens) {
-    const missing = collectionSize - owned;
-    return tokens >= missing;
+    if (!Number.isInteger(config.elementsCollected) || config.elementsCollected < 0 || config.elementsCollected > config.collectionSize) {
+        return "Elements Collected must be between 0 and Collection Size.";
+    }
+
+    if (!Number.isInteger(config.collectionTokens) || config.collectionTokens < 0) {
+        return "Collection Tokens must be 0 or higher.";
+    }
+
+    if (!Number.isInteger(config.duplicateRate) || config.duplicateRate < 1 || config.duplicateRate > CONSTANTS.MAX_DUPLICATE_RATE) {
+        return `Duplicate Rate must be between 1 and ${CONSTANTS.MAX_DUPLICATE_RATE}.`;
+    }
+
+    if (!Number.isInteger(config.duplicates) || config.duplicates < 0) {
+        return "Duplicates must be 0 or higher.";
+    }
+
+    if (!Number.isInteger(config.duplicates) || config.duplicates >= config.duplicateRate) {
+        return "Duplicates must be lower than Duplicate Rate.";
+    }
+
+    if (!Number.isInteger(config.elementsPerContainer) || config.elementsPerContainer < 1 || config.elementsPerContainer > CONSTANTS.MAX_ELEMENTS_PER_CONTAINER) {
+        return `Elements Per Container must be between 1 and ${CONSTANTS.MAX_ELEMENTS_PER_CONTAINER}.`;
+    }
+
+    return "";
 }
 
 function simulateOneRun(config) {
@@ -98,29 +141,17 @@ function simulateOneRun(config) {
     return containers;
 }
 
-export function runSimulation(config) {
-    const results = [];
-
-    for (let i = 0; i < config.simulations; i++) {
-        results.push(simulateOneRun(config));
-    }
-
-    results.sort((a, b) => a - b);
-
-    const sum = results.reduce((total, value) => total + value, 0);
-
-    return {
-        average: sum / results.length,
-        lucky: percentile(results, CONSTANTS.VERY_LUCKY_PERCENTILE),
-        typical: percentile(results, CONSTANTS.TYPICAL_PERCENTILE),
-        conservative: percentile(results, CONSTANTS.CONSERVATIVE_PERCENTILE),
-        unlucky: percentile(results, CONSTANTS.VERY_UNLUCKY_PERCENTILE),
-        bestCase: calculateBestCase(config),
-        worstCase: calculateWorstCase(config)
-    };
+function percentile(sortedValues, percent) {
+    const index = Math.ceil((percent / 100) * sortedValues.length) - 1;
+    return sortedValues[Math.max(0, Math.min(index, sortedValues.length - 1))];
 }
 
-export function calculateBestCase(config) {
+function canFinish(collectionSize, owned, tokens) {
+    const missing = collectionSize - owned;
+    return tokens >= missing;
+}
+
+function calculateBestCase(config) {
     const missing = Math.max(
         0,
         config.collectionSize - config.elementsCollected - config.collectionTokens
@@ -129,7 +160,7 @@ export function calculateBestCase(config) {
     return Math.ceil(missing / config.elementsPerContainer);
 }
 
-export function calculateWorstCase(config) {
+function calculateWorstCase(config) {
     const missing = Math.max(0, config.collectionSize - config.elementsCollected);
     const tokensStillNeeded = Math.max(0, missing - config.collectionTokens);
     const duplicateItemsNeeded = Math.max(
@@ -138,32 +169,4 @@ export function calculateWorstCase(config) {
     );
 
     return Math.ceil(duplicateItemsNeeded / config.elementsPerContainer);
-}
-
-export function validateConfig(config) {
-    if (!Number.isInteger(config.collectionSize) || config.collectionSize < 1 || config.collectionSize > CONSTANTS.MAX_COLLECTION_SIZE) {
-        return `Collection Size must be between 1 and ${CONSTANTS.MAX_COLLECTION_SIZE}.`;
-    }
-
-    if (!Number.isInteger(config.elementsCollected) || config.elementsCollected < 0 || config.elementsCollected > config.collectionSize) {
-        return "Elements Collected must be between 0 and Collection Size.";
-    }
-
-    if (!Number.isInteger(config.collectionTokens) || config.collectionTokens < 0) {
-        return "Collection Tokens must be 0 or higher.";
-    }
-
-    if (!Number.isInteger(config.duplicateRate) || config.duplicateRate < 1 || config.duplicateRate > CONSTANTS.MAX_DUPLICATE_RATE) {
-        return `Duplicate Rate must be between 1 and ${CONSTANTS.MAX_DUPLICATE_RATE}.`;
-    }
-
-    if (!Number.isInteger(config.duplicates) || config.duplicates < 0) {
-        return "Duplicates must be 0 or higher.";
-    }
-
-    if (!Number.isInteger(config.elementsPerContainer) || config.elementsPerContainer < 1 || config.elementsPerContainer > CONSTANTS.MAX_ELEMENTS_PER_CONTAINER) {
-        return `Elements Per Container must be between 1 and ${CONSTANTS.MAX_ELEMENTS_PER_CONTAINER}.`;
-    }
-
-    return "";
 }
