@@ -59,8 +59,8 @@ h1 {
 }
 
 .hero-icon {
-    width: 72px;
-    height: 72px;
+    max-width: 100px;
+    max-height: 100px;
 
     flex-shrink: 0;
 }
