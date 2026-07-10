@@ -2,7 +2,8 @@
 
 The goal of this project was to provide players with a way to estimate how many containers they would need to complete a collections, along with the cost. This application uses a Monte Carlo simulation to produce a range of expected outcomes. It it takes duplicates and their tokens into consideration with the simulation as well.
 
-> [!NOTE] This calculator is intended as an estimation tool. Container drops are random, so your actual results may be better or worse than the estimate. The calculator intentionally presents a **50%--80% expected range**. The lower end represents a typical outcome, while the upper end provides a conservative "heads up" for players end up being more unlucky.
+> [!NOTE]
+> This calculator is intended as an estimation tool. Container drops are random, so your actual results may be better or worse than the estimate. The calculator intentionally presents a **50%--80% expected range**. The lower end represents a typical outcome, while the upper end provides a conservative "heads up" for players end up being more unlucky.
 
 ## Features
 -   [ ] Searchable Collection Templates
