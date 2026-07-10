@@ -1,4 +1,4 @@
-# World of Warships Collection Calculator ⚓
+# World of Warships Collection Calc ⚓
 
 The goal of this project was to provide players with a way to estimate how many containers they would need to complete a collections, along with the cost. This application uses a Monte Carlo simulation to produce a range of expected outcomes. It it takes duplicates and their tokens into consideration with the simulation as well.
 
