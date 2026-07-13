@@ -1,87 +1,50 @@
-# World of Warships Collection Calculator ⚓
+# World of Warships Collection Calc ⚓
 
-The goal of this project is to help players estimate how many containers
-they may need to complete a World of Warships collection. Rather than
-relying on simple averages, the calculator uses Monte Carlo simulations
-to produce a realistic expectation range while accounting for duplicate
-collection mechanics.
+The goal of this project was to provide players with a way to estimate how many containers they would need to complete a collections, along with the cost. This application uses a Monte Carlo simulation to produce a range of expected outcomes. It it takes duplicates and their tokens into consideration with the simulation as well.
 
-> \[!NOTE\] This calculator is intended as an estimation tool. Container
-> drops are random, so your actual results may be better or worse than
-> the estimate.
-
-> \[!TIP\] The calculator intentionally presents a **50%--90% expected
-> range**. The lower end represents a typical outcome, while the upper
-> end provides a more conservative expectation for players who want to
-> avoid underestimating the number of containers they'll need.
+> [!NOTE]
+> This calculator is intended as an estimation tool. Container drops are random, so your actual results may be better or worse than the estimate. The calculator intentionally presents a **50%--80% expected range**. The lower end represents a typical outcome, while the upper end provides a conservative "heads up" for players end up being more unlucky.
 
 ## Features
-
--   [x] Monte Carlo simulation
--   [x] Duplicate token conversion support
--   [x] Existing collection progress
--   [x] Existing collection tokens
--   [x] Duplicate progress tracking
--   [x] Configurable collection sizes
--   [x] Optional container cost calculation
--   [x] Best and worst case reference values
--   [x] Simulation timing display
--   [ ] Tells RNGesus to be nice to you
+-   [ ] Searchable Collection Templates
+-   [x] Manual Collection Configuration
+-   [x] Completion Progress Agnostic
+-   [x] Accounts For Duplicate Exchange
+-   [x] Container Cost Calculations
+-   [x] Best, Worst, Average, etc. Statisctics
+-   [ ] Asks RNGesus to be kind to you
 
 ## Quick Start
-
-1.  Open the calculator in your browser.
+1.  Open the calculator [here](https://heykrystal.github.io/wows-collection-calc/).
 2.  Enter your collection information.
-3.  Click **Calculate Estimate**.
-4.  Review the expected container range and optional cost estimate.
+3.  Click or tap **Calculate Estimate**.
+4.  ???
+5.  Review the estimates for your container purchase forcasting.
 
 ## Usage
-
 ### Collection Size
-
-The total number of unique elements in the collection.
-
+The total number of unique elements in the collection. 
 ### Elements Collected
-
-The number of unique collection elements you already own.
-
+The number of unique collection elements already owned.
 ### Collection Tokens
-
-Completed tokens that can immediately be exchanged for missing
-collection elements.
-
-### Duplicate Rate
-
-The number of duplicate elements required to create a new collection
+The number of collection tokens owned; those tokens recieved when enough duplicates are aquired.
+### Duplicate Exchange Rate
+The number of duplicate elements needed to earn a collection
 token.
-
 ### Duplicates
-
 Your current progress toward your next collection token.
-
 ### Elements Per Container
-
-How many collection elements each container awards.
-
+How many collection elements each container awards. You will have to find this on the container details or on Wargaming's [Container Contents and Drop Chances](https://worldofwarships.asia/en/content/contents-and-drop-rates-of-containers/) page.
 ### Container Cost
-
-Optional. If provided, the calculator estimates the expected cost range
-in Coal or Doubloons.
+Optional. If provided, the calculator will show the cost based off the range of container estimated.
 
 ## How the Estimate Works
+The calculator performs a large number of simulated collection completions using the collection details provided. Rather than immediately spending collection tokens, it assumes an optimal strategy where tokens are saved until enough have accumulated to complete the remaining collection.
 
-The calculator performs a large number of simulated collection
-completions using the current inputs. Rather than immediately spending
-collection tokens, it assumes an optimal strategy where tokens are saved
-until enough have accumulated to complete the remaining collection.
-
-The displayed **Expected Containers** range is based on the 50th and
-90th percentiles of the simulation results, giving both a typical
-outcome and a conservative expectation.
+The displayed **Expected Containers** range is based on the 50th and 80th percentiles of the simulation results, giving both a typical outcome (50%) and a conservative expectation (80%). This range should apply to most players, and is narrow enough to give a reasonable expectation.
 
 ## Examples
-
-A brand new 16-element collection:
+A very typical example for a brand new 16-element collection:
 
     Collection Size: 16
     Elements Collected: 0
@@ -91,23 +54,12 @@ A brand new 16-element collection:
     Elements Per Container: 1
 
 ## Hosting
-
-This project is a completely static HTML, CSS, and JavaScript
-application and can be hosted using GitHub Pages or any standard web
-server. No backend is required.
+This project is a completely static HTML, CSS, and JavaScript application and can be hosted using GitHub Pages or any standard web server.
+Collection dataset will change overtime and API access is required to keep those updated.
 
 ## Issues
-
-This project was created primarily as a personal utility and shared
-because I think other players may find it useful.
-
-If you discover an issue affecting the accuracy of the calculations,
-feel free to open an issue. Suggestions are welcome, though I may not
-implement every feature request.
+This is primarily a personal project. If there are obviously valid problems or issues with the calculations, feel free to open an issue and I will try my best to get to it.
+However, requests that border enhancements or conveniences will be a stretch for me. I just don't have a lot of time for that.
 
 ## Contribution
-
-If you'd like to experiment or customize the calculator for your own
-use, feel free to fork the project and make it your own. If you improve
-the simulation or discover a mathematical edge case, I'd love to hear
-about it. 😊
+I'm not super familiar with GitHub's collaboration features. I'll try to be accomodating where it makes sense though. If you're wanting to make edits for your own personal use feel free to fork the project and do whatever you'd like to it. 😊
