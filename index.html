@@ -36,7 +36,7 @@
                     <div class="hero-text">
                         <h1>World of Warships Collection Calc</h1>
                         <p>
-                            Estimate how many containers you need to complete a collection.
+                            Estimate how many containers will be needed to complete a collection.
                             <br>Calc is short for calculator; I'm just using slang guys.
                         </p>
                     </div>
@@ -64,6 +64,27 @@
                 <h2>Collection Details</h2>
 
                 <form id="calculatorForm">
+
+                    <div class="collection-combobox field">
+                        <label for="collectionSearch">
+                            Collection
+                            <span class="tooltip" tabindex="0"
+                                data-tip="Lookup a collection to prepopulate the size and duplicate rate.">?</span>
+                        </label>
+
+                        <input id="collectionSearch" type="text" role="combobox" aria-autocomplete="list"
+                            aria-expanded="false" aria-controls="collectionList" value="" autocomplete="off"
+                            placeholder="Search collections or just enter manually below.">
+
+                        <ul id="collectionList" class="collection-list hidden" role="listbox">
+                            <li>Operation Rheinübung</li>
+                            <li>The Great Eight</li>
+                            <li>Allied Heroes</li>
+                            <li>High School Fleet</li>
+                            <li>Unfailing Devotion</li>
+                        </ul>
+                    </div>
+
                     <div class="field">
                         <label for="collectionSize">
                             Collection Size
