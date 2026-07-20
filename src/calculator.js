@@ -35,17 +35,24 @@
 */
 export const CONSTANTS = {
     SIMULATION_COUNT: 500000,
+
     VERY_LUCKY_PERCENTILE: 5,
     TYPICAL_PERCENTILE: 50,
     CONSERVATIVE_PERCENTILE: 80,
     VERY_UNLUCKY_PERCENTILE: 95,
+
     MAX_COLLECTION_SIZE: 256,
     MAX_ELEMENTS_PER_CONTAINER: 100,
-    MAX_DUPLICATE_RATE: 1000
+    MAX_DUPLICATE_RATE: 1000,
+
+    ELEMENT_CHANCE_IN_DAILY: 0.60
 };
 
 export function runSimulation(config) {
     const results = [];
+
+    
+    console.log('isDaily set to: ' + config.isDaily);
 
     for (let i = 0; i < config.simulations; i++) {
         results.push(simulateOneRun(config));
@@ -116,6 +123,10 @@ function simulateOneRun(config) {
     while (!canFinish(config.collectionSize, owned, tokens)) {
         containers++;
 
+        if (config.isDaily && Math.random() >= CONSTANTS.ELEMENT_CHANCE_IN_DAILY) {
+            continue;
+        }
+
         for (let i = 0; i < config.elementsPerContainer; i++) {
             if (canFinish(config.collectionSize, owned, tokens)) {
                 break;
@@ -161,6 +172,10 @@ function calculateBestCase(config) {
 }
 
 function calculateWorstCase(config) {
+    if (config.isDaily) {
+        return -1;
+    }
+
     const missing = Math.max(0, config.collectionSize - config.elementsCollected);
     const tokensStillNeeded = Math.max(0, missing - config.collectionTokens);
     const duplicateItemsNeeded = Math.max(

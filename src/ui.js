@@ -4,6 +4,9 @@ import {
     runSimulation,
     validateConfig
 } from "./calculator.js";
+import {
+    loadCollections
+} from "./collections.js";
 
 const form = document.getElementById("calculatorForm");
 const errorBox = document.getElementById("errorBox");
@@ -11,6 +14,17 @@ const results = document.getElementById("results");
 const emptyState = document.getElementById("emptyState");
 const notice = document.getElementById("notice");
 const dismissNotice = document.getElementById("dismissNotice");
+const collectionSearch = document.getElementById("collectionSearch");
+const collectionToggle = document.getElementById("collectionToggle");
+const collectionOptions = document.getElementById("collectionOptions");
+const collectionCombobox = collectionSearch.closest(".combobox");
+
+let collections = [];
+let filteredCollections = [];
+let selectedCollection = null;
+let activeOptionIndex = -1;
+
+initializeCollectionCombobox();
 
 if (notice && dismissNotice) {
     dismissNotice.addEventListener("click", () => {
@@ -47,6 +61,10 @@ function getInt(id) {
     return Number(document.getElementById(id).value);
 }
 
+function getBool(id) {
+    return Boolean(document.getElementById(id).checked);
+}
+
 function setText(id, value) {
     document.getElementById(id).textContent = value;
 }
@@ -58,6 +76,7 @@ function readConfigFromForm() {
         collectionTokens: getInt("collectionTokens"),
         duplicateRate: getInt("duplicateRate"),
         duplicates: getInt("duplicates"),
+        isDaily: getBool("isDaily"),
         elementsPerContainer: getInt("elementsPerContainer"),
         simulations: CONSTANTS.SIMULATION_COUNT
     }
@@ -69,7 +88,7 @@ function updateContainerOutputs(stats) {
     setText("luckyContainers", formatNumber(stats.lucky));
     setText("unluckyContainers", formatNumber(stats.unlucky));
     setText("bestCaseContainers", formatNumber(stats.bestCase));
-    setText("worstCaseContainers", formatNumber(stats.worstCase));
+    setText("worstCaseContainers", (stats.worstCase < 0 ? '∞' : formatNumber(stats.worstCase)));
 }
 
 function updateCostOutputs(stats, containerCost, currency) {
@@ -85,7 +104,7 @@ function updateCostOutputs(stats, containerCost, currency) {
     setText("luckyCost", `${formatNumber(luckyCost)} ${currency}`);
     setText("unluckyCost", `${formatNumber(unluckyCost)} ${currency}`);
     setText("bestCaseCost", `${formatNumber(bestCaseCost)} ${currency}`);
-    setText("worstCaseCost", `${formatNumber(worstCaseCost)} ${currency}`);
+    setText("worstCaseCost", `${(stats.worstCase < 0 ? '∞' : formatNumber(worstCaseCost))} ${currency}`);
     setText("averageCost", `${formatNumber(averageCost)} ${currency}`);
 }
 
@@ -105,6 +124,445 @@ function hideCostOutputs() {
     document.querySelectorAll(".cost-output").forEach((element) => {
         element.classList.add("hidden");
     });
+}
+
+function handleCollectionFocus() {
+    if (selectedCollection) {
+        collectionSearch.select();
+        return;
+    }
+
+    filterAndRenderCollections(
+        collectionSearch.value
+    );
+
+    openCollectionOptions();
+}
+
+function handleCollectionInput() {
+    selectedCollection = null;
+    activeOptionIndex = -1;
+
+    updateCollectionToggle();
+
+    filterAndRenderCollections(
+        collectionSearch.value.trim()
+    );
+
+    openCollectionOptions();
+}
+
+function handleCollectionToggle(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (selectedCollection) {
+        clearSelectedCollection();
+        return;
+    }
+
+    if (isCollectionOptionsOpen()) {
+        closeCollectionOptions();
+        return;
+    }
+
+    collectionSearch.focus();
+    filterAndRenderCollections(collectionSearch.value);
+    openCollectionOptions();
+}
+
+function filterAndRenderCollections(query) {
+    const normalizedQuery = normalizeSearchText(query);
+
+    filteredCollections = collections.filter((collection) => {
+        if (normalizedQuery === "") {
+            return true;
+        }
+
+        const normalizedName =
+            normalizeSearchText(collection.name);
+
+        const searchWords =
+            normalizedQuery.split(/\s+/);
+
+        return searchWords.every((word) =>
+            normalizedName.includes(word)
+        );
+    });
+
+    renderCollectionOptions();
+}
+
+function normalizeSearchText(value) {
+    return value
+        .toLocaleLowerCase()
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "");
+}
+
+function renderCollectionOptions() {
+    collectionOptions.replaceChildren();
+
+    if (filteredCollections.length === 0) {
+        const empty = document.createElement("li");
+
+        empty.className = "combobox-empty";
+        empty.textContent = "No matching collections found.";
+
+        collectionOptions.appendChild(empty);
+        return;
+    }
+
+    filteredCollections.forEach((collection, index) => {
+        const option = document.createElement("li");
+
+        option.id = `collection-option-${index}`;
+        option.className = "combobox-option";
+        option.dataset.index = String(index);
+        option.setAttribute("role", "option");
+        option.setAttribute(
+            "aria-selected",
+            String(collection.id === selectedCollection?.id)
+        );
+
+        if (index === activeOptionIndex) {
+            option.classList.add("active");
+        }
+
+        if (collection.id === selectedCollection?.id) {
+            option.classList.add("selected");
+        }
+
+        if (collection.image) {
+            const image = document.createElement("img");
+
+            image.className = "combobox-option-image";
+            image.src = collection.image;
+            image.alt = "";
+            image.loading = "lazy";
+
+            option.appendChild(image);
+        }
+
+        const text = document.createElement("div");
+        text.className = "combobox-option-text";
+
+        const name = document.createElement("div");
+        name.className = "combobox-option-name";
+        name.textContent = collection.name;
+
+        text.appendChild(name);
+
+        if (collection.id !== "manual") {
+            const details = document.createElement("div");
+
+            details.className = "combobox-option-details";
+            details.textContent =
+                `${collection.size} elements · ` +
+                `${collection.duplicateRate}:1 duplicate rate`;
+
+            text.appendChild(details);
+        }
+
+        option.appendChild(text);
+        collectionOptions.appendChild(option);
+    });
+
+    updateActiveCollectionOption();
+}
+
+function handleCollectionOptionMouseDown(event) {
+    const option = event.target.closest(".combobox-option");
+
+    if (!option) {
+        return;
+    }
+
+    event.preventDefault();
+
+    const index = Number(option.dataset.index);
+    selectCollection(filteredCollections[index]);
+}
+
+function handleCollectionKeydown(event) {
+    switch (event.key) {
+        case "ArrowDown":
+            event.preventDefault();
+
+            if (!isCollectionOptionsOpen()) {
+                filterAndRenderCollections(
+                    collectionSearch.value
+                );
+                openCollectionOptions();
+            }
+
+            moveActiveOption(1);
+            break;
+
+        case "ArrowUp":
+            event.preventDefault();
+
+            if (!isCollectionOptionsOpen()) {
+                filterAndRenderCollections(
+                    collectionSearch.value
+                );
+                openCollectionOptions();
+            }
+
+            moveActiveOption(-1);
+            break;
+
+        case "Enter":
+            if (
+                isCollectionOptionsOpen() &&
+                activeOptionIndex >= 0
+            ) {
+                event.preventDefault();
+
+                selectCollection(
+                    filteredCollections[activeOptionIndex]
+                );
+            }
+            break;
+
+        case "Escape":
+            if (isCollectionOptionsOpen()) {
+                event.preventDefault();
+                closeCollectionOptions();
+
+                collectionSearch.value =
+                    selectedCollection?.name ?? "";
+
+                updateCollectionToggle();
+            }
+            break;
+
+        case "Tab":
+            closeCollectionOptions();
+
+            if (!selectedCollection) {
+                restoreOrSelectExactCollection();
+            }
+            break;
+    }
+}
+
+function moveActiveOption(direction) {
+    if (filteredCollections.length === 0) {
+        return;
+    }
+
+    activeOptionIndex += direction;
+
+    if (activeOptionIndex < 0) {
+        activeOptionIndex =
+            filteredCollections.length - 1;
+    }
+
+    if (
+        activeOptionIndex >=
+        filteredCollections.length
+    ) {
+        activeOptionIndex = 0;
+    }
+
+    renderCollectionOptions();
+}
+
+function selectCollection(collection) {
+    if (!collection) {
+        return;
+    }
+
+    selectedCollection = collection;
+    collectionSearch.value = collection.name;
+    activeOptionIndex = -1;
+
+    applyCollectionPreset(collection);
+    updateCollectionToggle();
+    closeCollectionOptions();
+}
+
+function applyCollectionPreset(collection) {
+    if (collection.id === "manual") {
+        return;
+    }
+
+    document.getElementById("collectionSize").value =
+        collection.size;
+
+    document.getElementById("duplicateRate").value =
+        collection.duplicateRate;
+}
+
+function openCollectionOptions() {
+    collectionOptions.classList.remove("hidden");
+    collectionCombobox.classList.add("open");
+
+    collectionSearch.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+}
+
+function closeCollectionOptions() {
+    collectionOptions.classList.add("hidden");
+    collectionCombobox.classList.remove("open");
+
+    collectionSearch.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+    collectionSearch.removeAttribute(
+        "aria-activedescendant"
+    );
+}
+
+function isCollectionOptionsOpen() {
+    return !collectionOptions.classList.contains("hidden");
+}
+
+function updateActiveCollectionOption() {
+    const activeOption =
+        collectionOptions.querySelector(
+            ".combobox-option.active"
+        );
+
+    if (!activeOption) {
+        collectionSearch.removeAttribute(
+            "aria-activedescendant"
+        );
+        return;
+    }
+
+    collectionSearch.setAttribute(
+        "aria-activedescendant",
+        activeOption.id
+    );
+
+    activeOption.scrollIntoView({
+        block: "nearest"
+    });
+}
+
+function handleOutsideCollectionClick(event) {
+    if (!collectionCombobox.contains(event.target)) {
+        closeCollectionOptions();
+        restoreOrSelectExactCollection();
+    }
+}
+
+function restoreOrSelectExactCollection() {
+    const typedName =
+        collectionSearch.value.trim();
+
+    if (typedName === "") {
+        selectedCollection = null;
+        updateCollectionToggle();
+        return;
+    }
+
+    const exactMatch = collections.find(
+        (collection) =>
+            collection.name.localeCompare(
+                typedName,
+                undefined,
+                { sensitivity: "base" }
+            ) === 0
+    );
+
+    if (exactMatch) {
+        selectCollection(exactMatch);
+        return;
+    }
+
+    collectionSearch.value =
+        selectedCollection?.name ?? "";
+
+    updateCollectionToggle();
+}
+
+function updateCollectionToggle() {
+    const hasSelection = selectedCollection !== null;
+
+    collectionToggle.textContent =
+        hasSelection ? "×" : "▾";
+
+    collectionToggle.setAttribute(
+        "aria-label",
+        hasSelection
+            ? "Clear selected collection"
+            : "Show collections"
+    );
+
+    collectionToggle.classList.toggle(
+        "clear",
+        hasSelection
+    );
+}
+
+function clearSelectedCollection() {
+    selectedCollection = null;
+    activeOptionIndex = -1;
+
+    collectionSearch.value = "";
+
+    updateCollectionToggle();
+    closeCollectionOptions();
+
+    collectionSearch.focus();
+}
+
+async function initializeCollectionCombobox() {
+    try {
+        collections = await loadCollections();
+    } catch (error) {
+        console.error(error);
+
+        collections = [
+            {
+                id: "manual",
+                name: "Manual2",
+                size: null,
+                duplicateRate: null,
+                image: null
+            }
+        ];
+    }
+
+    filterAndRenderCollections("");
+    updateCollectionToggle();
+
+    collectionSearch.addEventListener(
+        "focus",
+        handleCollectionFocus
+    );
+
+    collectionSearch.addEventListener(
+        "input",
+        handleCollectionInput
+    );
+
+    collectionSearch.addEventListener(
+        "keydown",
+        handleCollectionKeydown
+    );
+
+    collectionToggle.addEventListener(
+        "click",
+        handleCollectionToggle
+    );
+
+    collectionOptions.addEventListener(
+        "mousedown",
+        handleCollectionOptionMouseDown
+    );
+
+    document.addEventListener(
+        "click",
+        handleOutsideCollectionClick
+    );
 }
 
 form.addEventListener("submit", async function (event) {
