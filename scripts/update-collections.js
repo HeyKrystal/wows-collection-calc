@@ -225,9 +225,29 @@ async function readExistingOutput() {
             "utf8"
         );
 
-        return JSON.parse(contents);
+        if (contents.trim() === "") {
+            console.log(
+                `${OUTPUT_PATH} is empty. It will be replaced.`
+            );
+
+            return null;
+        }
+
+        try {
+            return JSON.parse(contents);
+        } catch {
+            console.log(
+                `${OUTPUT_PATH} contains invalid JSON. It will be replaced.`
+            );
+
+            return null;
+        }
     } catch (error) {
         if (error.code === "ENOENT") {
+            console.log(
+                `${OUTPUT_PATH} does not exist yet. It will be created.`
+            );
+
             return null;
         }
 
