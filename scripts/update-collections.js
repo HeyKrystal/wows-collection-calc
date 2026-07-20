@@ -304,6 +304,12 @@ async function main() {
             rawElements
         );
 
+    if (compiledCollections.length < 40) {
+        throw new Error(
+            `Only ${compiledCollections.length} collections were compiled; refusing to overwrite known-good data.`
+        );
+    }
+
     console.log(
         `Compiled ${compiledCollections.length} valid collections.`
     );

@@ -51,9 +51,6 @@ export const CONSTANTS = {
 export function runSimulation(config) {
     const results = [];
 
-    
-    console.log('isDaily set to: ' + config.isDaily);
-
     for (let i = 0; i < config.simulations; i++) {
         results.push(simulateOneRun(config));
     }
@@ -99,12 +96,8 @@ export function validateConfig(config) {
         return `Duplicate Rate must be between 1 and ${CONSTANTS.MAX_DUPLICATE_RATE}.`;
     }
 
-    if (!Number.isInteger(config.duplicates) || config.duplicates < 0) {
-        return "Duplicates must be 0 or higher.";
-    }
-
-    if (!Number.isInteger(config.duplicates) || config.duplicates >= config.duplicateRate) {
-        return "Duplicates must be lower than Duplicate Rate.";
+    if (!Number.isInteger(config.duplicates) || config.duplicates < 0 || config.duplicates >= config.duplicateRate) {
+        return "Duplicates must be greater than 0 and less that the Duplicate Exchange Rate.";
     }
 
     if (!Number.isInteger(config.elementsPerContainer) || config.elementsPerContainer < 1 || config.elementsPerContainer > CONSTANTS.MAX_ELEMENTS_PER_CONTAINER) {

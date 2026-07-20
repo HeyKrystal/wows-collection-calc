@@ -1,6 +1,5 @@
 import {
     CONSTANTS,
-    normalizeStartingTokens,
     runSimulation,
     validateConfig
 } from "./calculator.js";
@@ -83,7 +82,12 @@ function readConfigFromForm() {
 }
 
 function updateContainerOutputs(stats) {
-    setText("expectedRange", `${formatNumber(stats.typical)} – ${formatNumber(stats.conservative)}`);
+    const expectedText =
+        stats.typical === stats.conservative
+            ? `Around ${formatNumber(stats.typical)}`
+            : `${formatNumber(stats.typical)} – ${formatNumber(stats.conservative)}`;
+
+    setText("expectedRange", expectedText);
     setText("averageContainers", stats.average.toFixed(2));
     setText("luckyContainers", formatNumber(stats.lucky));
     setText("unluckyContainers", formatNumber(stats.unlucky));
@@ -520,15 +524,8 @@ async function initializeCollectionCombobox() {
     } catch (error) {
         console.error(error);
 
-        collections = [
-            {
-                id: "manual",
-                name: "Manual2",
-                size: null,
-                duplicateRate: null,
-                image: null
-            }
-        ];
+        collections = [];
+        collectionSearch.placeholder = "Collection presets unavailable";
     }
 
     filterAndRenderCollections("");

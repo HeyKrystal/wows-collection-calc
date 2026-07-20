@@ -89,7 +89,7 @@ jobs:
       id-token: write
 
     # Deploying the exact ref the collection update was in
-    uses: ./.github/workflows/deploy-to-pages.yml
+    uses: ./.github/workflows/pages-deploy-callable.yml
     with:
       deploy_ref: ${{ needs.update.outputs.commit_sha }}
 

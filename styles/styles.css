@@ -549,7 +549,6 @@ input[type="number"] {
 }
 
 .result-box {
-    max-height: 200px;
     padding: 14px;
     overflow: hidden;
 
@@ -712,5 +711,23 @@ input[type="number"] {
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
         transition-duration: 0.01ms !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .tooltip:hover::after,
+    .tooltip:focus::after {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        top: auto;
+        bottom: 16px;
+        width: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .combobox-options {
+        max-height: min(260px, 45vh);
     }
 }
