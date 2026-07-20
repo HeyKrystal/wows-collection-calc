@@ -34,6 +34,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Inspect npm output
+        run: |
+          echo "Current directory:"
+          pwd
+      
+          echo "Root files:"
+          ls -la
+      
+          echo "npm package-lock setting:"
+          npm config get package-lock
+      
+          echo "Git status:"
+          git status --short
+
       - name: Install Chromium
         run: npx playwright install chromium --with-deps
 
