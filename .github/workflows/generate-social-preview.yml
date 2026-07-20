@@ -32,7 +32,7 @@ jobs:
           package-manager-cache: false
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Inspect npm output
         run: |
@@ -69,21 +69,3 @@ jobs:
           git add images/social-preview.png
           git commit -m "Update social preview"
           git push
-
-      - name: Commit lock file and preview
-        shell: bash
-        run: |
-          if [ -z "$(git status --porcelain -- package-lock.json images/social-preview.png)" ]; then
-            echo "No generated files changed."
-            exit 0
-          fi
-      
-          git status --short -- package-lock.json images/social-preview.png
-      
-          git config user.name "WoWS Preview Bot"
-          git config user.email \
-            "41898282+github-actions[bot]@users.noreply.github.com"
-      
-          git add package-lock.json images/social-preview.png
-          git commit -m "Generate social preview"
-            git push
