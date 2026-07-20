@@ -10,14 +10,14 @@ on:
   # Manual kickoff
   workflow_dispatch:
 
-  # Calls job with current sha
-  jobs:
-    deploy:
-      permissions:
-        contents: read
-        pages: write
-        id-token: write
+# Calls job with current sha
+jobs:
+  deploy:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
 
-      uses: ./.github/workflows/pages-deploy-callable.yml
-      with:
-        deploy_ref: ${{ github.sha }}
+    uses: ./.github/workflows/pages-deploy-callable.yml
+    with:
+      deploy_ref: ${{ github.sha }}
