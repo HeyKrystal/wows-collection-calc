@@ -22,8 +22,8 @@ permissions:
   contents: write
 
 jobs:
-  name: Generate social preview card
   generate:
+    name: Generate social preview card
     runs-on: ubuntu-latest
 
     steps:
