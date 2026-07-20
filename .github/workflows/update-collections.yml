@@ -1,0 +1,69 @@
+name: Update collection data
+
+on:
+  schedule:
+    # Runs nightly at 08:17 UTC.
+    # This is 3:17 AM Central during daylight saving time.
+    - cron: "17 8 * * *"
+
+  # Provides a Run workflow button in GitHub.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collection-data-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: Fetch and compile collection data
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate collection data
+        env:
+          WG_APPLICATION_ID: ${{ secrets.WG_APPLICATION_ID }}
+        run: node update-collections
+
+      - name: Commit updated data
+        id: changes
+        shell: bash
+        run: |
+          if git diff --quiet -- data/collections.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No collection data changed."
+            exit 0
+          fi
+
+          git config user.name "WoWS Collection Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add data/collections.json
+          git commit -m "Update collection data"
+          git push
+
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Configure Pages
+        if: steps.changes.outputs.changed == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: steps.changes.outputs.changed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy Pages
+        if: steps.changes.outputs.changed == 'true'
+        uses: actions/deploy-pages@v5
