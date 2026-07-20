@@ -61,98 +61,133 @@
 
         <div class="layout">
             <section class="card">
-                <h2>Collection Details</h2>
-
                 <form id="calculatorForm">
+                    <!-- Collection Details -->
 
-                    <div class="collection-combobox field">
-                        <label for="collectionSearch">
-                            Collection
-                            <span class="tooltip" tabindex="0"
-                                data-tip="Lookup a collection to prepopulate the size and duplicate rate.">?</span>
-                        </label>
+                    <section class="form-section">
+                        <h2 class="section-title">Collection Details</h2>
 
-                        <input id="collectionSearch" type="text" role="combobox" aria-autocomplete="list"
-                            aria-expanded="false" aria-controls="collectionList" value="" autocomplete="off"
-                            placeholder="Search collections or just enter manually below.">
+                        <div class="field collection-field">
+                            <label for="collectionSearch">
+                                Collection Name
+                                <span class="tooltip" tabindex="0"
+                                    data-tip="Search for a known collection, or leave blank to enter values manually.">
+                                    ?
+                                </span>
+                            </label>
 
-                        <ul id="collectionList" class="collection-list hidden" role="listbox">
-                            <li>Operation Rheinübung</li>
-                            <li>The Great Eight</li>
-                            <li>Allied Heroes</li>
-                            <li>High School Fleet</li>
-                            <li>Unfailing Devotion</li>
-                        </ul>
-                    </div>
+                            <div class="combobox">
+                                <div class="combobox-control">
+                                    <input id="collectionSearch" type="text" value="" placeholder="Search collections"
+                                        autocomplete="off" role="combobox" aria-autocomplete="list"
+                                        aria-expanded="false" aria-controls="collectionOptions"
+                                        aria-activedescendant="">
 
-                    <div class="field">
-                        <label for="collectionSize">
-                            Collection Size
-                            <span class="tooltip" tabindex="0"
-                                data-tip="Total number of elements in the collection.">?</span>
-                        </label>
-                        <input id="collectionSize" type="number" min="1" max="256" step="1" value="16" required />
-                    </div>
+                                    <button id="collectionToggle" class="combobox-toggle" type="button"
+                                        aria-label="Show collections" tabindex="-1">
+                                        ▾
+                                    </button>
+                                </div>
 
-                    <div class="field">
-                        <label for="elementsCollected">
-                            Elements Collected
-                            <span class="tooltip" tabindex="0" data-tip="Number of elements you already own.">?</span>
-                        </label>
-                        <input id="elementsCollected" type="number" min="0" max="256" step="1" value="1" required />
-                    </div>
-
-                    <div class="field">
-                        <label for="collectionTokens">
-                            Collection Tokens
-                            <span class="tooltip" tabindex="0" data-tip="Number of collection tokens earned.">?</span>
-                        </label>
-                        <input id="collectionTokens" type="number" min="0" step="1" value="0" required />
-                    </div>
-
-                    <div class="field">
-                        <label for="duplicateRate">
-                            Duplicate Rate
-                            <span class="tooltip" tabindex="0"
-                                data-tip="Number of duplicates required for a collection token.">?</span>
-                        </label>
-                        <input id="duplicateRate" type="number" min="1" step="1" value="4" required />
-                    </div>
-
-                    <div class="field">
-                        <label for="duplicates">
-                            Duplicates
-                            <span class="tooltip" tabindex="0"
-                                data-tip="Current duplicate progress towards next collection token.">?</span>
-                        </label>
-                        <input id="duplicates" type="number" min="0" step="1" value="0" required />
-                    </div>
-
-                    <div class="field">
-                        <label for="elementsPerContainer">
-                            Elements Per Container
-                            <span class="tooltip" tabindex="0"
-                                data-tip="How many collection elements each container grants.">?</span>
-                        </label>
-                        <input id="elementsPerContainer" type="number" min="1" max="100" step="1" value="1" required />
-                    </div>
-
-                    <div class="field">
-                        <label for="containerCost">
-                            Container Cost
-                            <span class="tooltip" tabindex="0"
-                                data-tip="Optional cost per container. Leave blank for free/daily containers.">?</span>
-                        </label>
-
-                        <div class="cost-row">
-                            <input id="containerCost" type="number" min="0" step="1" placeholder="Optional" />
-                            <select id="currency">
-                                <option value="🪨">Coal 🪨</option>
-                                <option value="🪙">Doubloons 🪙</option>
-                                <option value="🔗">Community Tokens 🔗</option>
-                            </select>
+                                <ul id="collectionOptions" class="combobox-options hidden" role="listbox"></ul>
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="collectionSize">
+                                    Collection Size
+                                    <span class="tooltip" tabindex="0"
+                                        data-tip="Total number of elements in the collection.">?</span>
+                                </label>
+                                <input id="collectionSize" type="number" min="1" max="256" step="1" value="16"
+                                    required />
+                            </div>
+                            <div class="field">
+                                <label for="duplicateRate">
+                                    Duplicate Exchange Rate
+                                    <span class="tooltip" tabindex="0"
+                                        data-tip="Number of duplicates required for a collection token.">?</span>
+                                </label>
+                                <input id="duplicateRate" type="number" min="1" step="1" value="4" required />
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Collection Progress -->
+
+                    <section class="form-section">
+                        <h2 class="section-title">Collection Progress</h2>
+
+                        <div class="field">
+                            <label for="elementsCollected">
+                                Elements Collected
+                                <span class="tooltip" tabindex="0"
+                                    data-tip="Number of elements you already own.">?</span>
+                            </label>
+                            <input id="elementsCollected" type="number" min="0" max="256" step="1" value="0" required />
+                        </div>
+
+                        <div class="field">
+                            <label for="collectionTokens">
+                                Tokens Earned
+                                <span class="tooltip" tabindex="0"
+                                    data-tip="Number of collection tokens earned.">?</span>
+                            </label>
+                            <input id="collectionTokens" type="number" min="0" step="1" value="0" required />
+                        </div>
+
+                        <div class="field">
+                            <label for="duplicates">
+                                Duplicates Held
+                                <span class="tooltip" tabindex="0"
+                                    data-tip="Current duplicate progress towards earning next collection token.">?</span>
+                            </label>
+                            <input id="duplicates" type="number" min="0" step="1" value="0" required />
+                        </div>
+                    </section>
+
+                    <!-- Container Details -->
+
+                    <section class="form-section">
+                        <h2 class="section-title">Collection Progress</h2>
+
+                        <div class="field">
+                            <label for="isDaily">
+                                Daily Containers?
+                                <span class="tooltip" tabindex="0"
+                                    data-tip="Check this if the collection elements are acquired through daily/standard containers like with a subscription collection.">?</span>
+                            </label>
+                            <input id="isDaily" type="checkbox" />
+                        </div>
+
+                        <div class="field">
+                            <label for="elementsPerContainer">
+                                Elements Per Container
+                                <span class="tooltip" tabindex="0"
+                                    data-tip="How many collection elements each container grants. (Leave this set to one for daily/standard containers.)">?</span>
+                            </label>
+                            <input id="elementsPerContainer" type="number" min="1" max="100" step="1" value="1"
+                                required />
+                        </div>
+
+                        <div class="field">
+                            <label for="containerCost">
+                                Container Cost
+                                <span class="tooltip" tabindex="0"
+                                    data-tip="Optional cost per container. Leave blank for free/daily containers.">?</span>
+                            </label>
+
+                            <div class="cost-row">
+                                <input id="containerCost" type="number" min="0" step="1" placeholder="Optional" />
+                                <select id="currency">
+                                    <option value="🪨">Coal 🪨</option>
+                                    <option value="🪙">Doubloons 🪙</option>
+                                    <option value="🔗">Community Tokens 🔗</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
 
                     <button id="calculateButton" class="primary-button" type="submit">Calculate Estimate</button>
                     <div id="errorBox" class="error"></div>
