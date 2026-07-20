@@ -13,6 +13,7 @@ on:
 # Calls job with current sha
 jobs:
   deploy:
+    name: Dispatch pages-deplo-callable job
     permissions:
       contents: read
       pages: write
