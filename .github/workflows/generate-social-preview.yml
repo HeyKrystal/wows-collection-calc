@@ -1,9 +1,12 @@
+# Workflow for generating image used for social links
 name: Generate social preview
 
 on:
+  # Allow for manual run
   workflow_dispatch:
 
   push:
+  # Run automatically when preview components are pushed
     branches:
       - main
     paths:
@@ -14,6 +17,7 @@ on:
       - package-lock.json
       - .github/workflows/generate-social-preview.yml
 
+# Needs write to commit preview image
 permissions:
   contents: write
 

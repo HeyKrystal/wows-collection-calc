@@ -1,18 +1,20 @@
+/*
+ * This script querys the Wargaming api to get collection and collection element data.
+ * It then compiles it down to only the necessary dataset for the webapp.
+ */
 import {
     mkdir,
     readFile,
     writeFile
 } from "node:fs/promises";
 
-const APPLICATION_ID = process.env.WG_APPLICATION_ID;
-
-const OUTPUT_PATH = "data/collections.json";
-
-// Change this if your application uses another region.
 const API_BASE_URL = "https://api.worldofwarships.com/wows/encyclopedia";
+const APPLICATION_ID = process.env.WG_APPLICATION_ID;
 
 const COLLECTIONS_ENDPOINT = "collections";
 const ELEMENTS_ENDPOINT = "collectioncards";
+
+const OUTPUT_PATH = "data/collections.json";
 
 if (!APPLICATION_ID) {
     throw new Error(
@@ -26,8 +28,8 @@ if (!APPLICATION_ID) {
  */
 async function fetchAllRecords(endpoint) {
     /*
-     * Start with a normal request that makes no pagination
-     * assumptions.
+     * Start with a normal request that makes no pagination assumptions.
+     * Defaults to single page, can be updated if WG implements pagination.
      */
     const firstResponse = await fetchEndpoint(endpoint);
 

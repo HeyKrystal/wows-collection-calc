@@ -1,7 +1,10 @@
+/*
+ * This script renders the social preview html then screenshots it
+ * for use with social preview metadata.
+ */
 import { access, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-
 import { chromium } from "playwright";
 
 const SOURCE_PATH = resolve("social-preview.html");

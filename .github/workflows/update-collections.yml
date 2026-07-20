@@ -1,35 +1,41 @@
+# Workflow for keeping collection data up to date via WG API
 name: Update collection data
 
 on:
   schedule:
-    # Runs nightly at 08:17 UTC.
-    # This is 3:17 AM Central during daylight saving time.
+    # Runs nightly at 08:17 UTC. (3:17 AM Central)
     - cron: "17 8 * * *"
 
-  # Provides a Run workflow button in GitHub.
+  # Allow manual kickoff
   workflow_dispatch:
 
-permissions:
-  contents: write
-  id-token: write
-
 concurrency:
-  group: collection-data-update
+  group: update-collections
   cancel-in-progress: false
 
 jobs:
   update:
     name: Fetch and compile collection data
+
     runs-on: ubuntu-latest
+
+    # This job needs to commit collections.json
+    permissions:
+      contents: write
+
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+      commit_sha: ${{ steps.commit.outputs.commit_sha }}
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version: 24
+          package-manager-cache: false
 
       - name: Generate collection data
         env:
@@ -37,9 +43,12 @@ jobs:
         run: node scripts/update-collections.js
 
       - name: Commit updated data
-        id: changes
+        id: commit
         shell: bash
         run: |
+          set -euo pipefail
+          
+          # Only commit when changes found in compiled data
           if [ -z "$(git status --porcelain -- data/collections.json)" ]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No collection data changed."
@@ -56,19 +65,54 @@ jobs:
           git add data/collections.json
           git commit -m "Update collection data"
           git push
+
+          # HEAD is now the newly created bot commit.
+          NEW_COMMIT_SHA="$(git rev-parse HEAD)"
+          echo "Committed collection update:"
+          echo "${NEW_COMMIT_SHA}"
       
           echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-      - name: Configure Pages
-        if: steps.changes.outputs.changed == 'true'
-        uses: actions/configure-pages@v5
+  deploy:
+    name: Deploy updated collection data
 
-      - name: Upload Pages artifact
-        if: steps.changes.outputs.changed == 'true'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "."
+    needs: update
 
-      - name: Deploy Pages
-        if: steps.changes.outputs.changed == 'true'
-        uses: actions/deploy-pages@v5
+    # Skip if collection data did not change
+    if: needs.update.outputs.changed == 'true'
+
+    # Permissions are passed to the deploy-to-pages workflow
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    # Deploying the exact ref the collection update was in
+    uses: ./.github/workflows/deploy-to-pages.yml
+    with:
+      deploy_ref: ${{ needs.update.outputs.commit_sha }}
+
+  report:
+    name: Report deployment results
+
+    needs:
+      - update
+      - deploy
+
+    # Run only after an actual deployment.
+    if: needs.update.outputs.changed == 'true' && needs.deploy.result == 'success'
+
+    runs-on: ubuntu-latest
+
+    permissions: {}
+
+    steps:
+      - name: Write deployment summary
+        shell: bash
+        run: |
+          {
+            echo "## Collection update deployed ##"
+            echo "- Commit: \`${{ needs.update.outputs.commit_sha }}\`"
+            echo "- Site: ${{ needs.deploy.outputs.page_url }}"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,23 @@
+# Dispatched the pages-deploy-callable workflow
+name: Dispatch pages deployment
+
+on:
+  # Auto on main commit
+  push:
+    branches:
+      - main
+
+  # Manual kickoff
+  workflow_dispatch:
+
+  # Calls job with current sha
+  jobs:
+    deploy:
+      permissions:
+        contents: read
+        pages: write
+        id-token: write
+
+      uses: ./.github/workflows/deploy-pages-callable.yml
+      with:
+        deploy_ref: ${{ github.sha }}
