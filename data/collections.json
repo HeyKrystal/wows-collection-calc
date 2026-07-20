@@ -1,0 +1,327 @@
+{
+  "updatedAt": "2026-07-20T03:58:18.597Z",
+  "collections": [
+    {
+      "id": 4254047152,
+      "name": "'39–'45 Chronicles",
+      "size": 16,
+      "duplicateRate": 4,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA039_EndOfWWII_7cb58010b54d299a3d99b248192987145c0d249e3a286bb90ead451090c26b65.png"
+    },
+    {
+      "id": 4263484336,
+      "name": "Allied Heroes",
+      "size": 12,
+      "duplicateRate": 1,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA030_May_Day_6915f1873799a592ce5e7da5504f75c03d6c532a5a2e3bd81b65e14cc418ae08.png"
+    },
+    {
+      "id": 4269775792,
+      "name": "Always Courageous",
+      "size": 16,
+      "duplicateRate": 4,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA024_USABB_0910_da51f172e3c40069336d1f8bd0e105d6ccf3d1fdc1f5c4a54892840c716b53e3.png"
+    },
+    {
+      "id": 4285504432,
+      "name": "American Cruisers",
+      "size": 48,
+      "duplicateRate": 5,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA009_AmericanArc_e9a6fe6dd38ddab05282c80441d80a974c33ef336cfbaea95efcf5261ae72289.png"
+    },
+    {
+      "id": 4279212976,
+      "name": "Azur Lane",
+      "size": 36,
+      "duplicateRate": 5,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA015_AzurLane_5613ce412aab70467881a15eb9bd01a3da9f16dccfd94c492759f98a4561f068.png"
+    },
+    {
+      "id": 4249852848,
+      "name": "Azur Lane Comics",
+      "size": 20,
+      "duplicateRate": 3,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA043_Azurlane_8_a8a963f4ef23369d044d38e2e8cd78d6f30091ebe0650b0d87caebaa49dd9f74.png"
+    },
+    {
+      "id": 4272921520,
+      "name": "Bad Advice: Behind the Scenes",
+      "size": 23,
+      "duplicateRate": 1,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA021_CAPT_159b472cea4e4897595e161572ee3f1b942a0800ba9fc6a02dcddead39263d03.png"
+    },
+    {
+      "id": 4258241456,
+      "name": "Battle of Paso de Patria",
+      "size": 60,
+      "duplicateRate": 3,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA035_PAMBB_138_65b335531f0e58064a898b69b75faa8e676e952f92bbec6373558eefffe98d80.png"
+    },
+    {
+      "id": 4288650160,
+      "name": "Battle of the North Cape",
+      "size": 16,
+      "duplicateRate": 4,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA006_HappyNewYear2018_1038a993b376e4d99a688f94317f748a431aa24634df9b42a9b6fed1b3553b9a.png"
+    },
+    {
+      "id": 4260338608,
+      "name": "Battle of the Somme",
+      "size": 60,
+      "duplicateRate": 2,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA033_Battle_Of_Somme_126_bf421b01231f0747a2ba5db3b74089e3d2f5a22c21f0ac78061bb3a59c37cb1b.png"
+    },
+    {
+      "id": 4281310128,
+      "name": "Belle Époque",
+      "size": 16,
+      "duplicateRate": 5,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA013_HappyNewYear2019_0e6d9779358e7fc3aa1efc0f21081a5c493869a74a8fa1b021aa7804ee8f5f5b.png"
+    },
+    {
+      "id": 4265581488,
+      "name": "Christmas and New Year in the Navy",
+      "size": 24,
+      "duplicateRate": 4,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA028_NY2022_24b1ba55f161defc1566a86a1ff96401861908ed23c6e5f5f18d13bbcc444612.png"
+    },
+    {
+      "id": 4245658544,
+      "name": "Dawn of a Nation",
+      "size": 60,
+      "duplicateRate": 2,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA047_Independence250_puzzle_d447b206adade0b18899a14fa93ccf8b94fd7ca5aa2c81f56c02dd2adf0b35f3.png"
+    },
+    {
+      "id": 4291795888,
+      "name": "Dunkirk",
+      "size": 16,
+      "duplicateRate": 5,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA003_Dunkirk_b794b236d016c51726f58dce0de14a457d43b9650f765f5cf6b7660bc264323a.png"
+    },
+    {
+      "id": 4251950000,
+      "name": "Fall of Rome",
+      "size": 4,
+      "duplicateRate": 1,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA041_From_The_Bottom_P2_5c875d2c78e1e3c655987e119b72b13e8508c57f4110b7748ab9ad5196be4d07.png"
+    },
+    {
+      "id": 4256144304,
+      "name": "Finest Hour",
+      "size": 60,
+      "duplicateRate": 2,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA037_NED_LegendaryCap_puzzle_86c7630497ab5f9df52315c0be869e168893aafce7b10fc555f5abc5720521fc.png"
+    },
+    {
+      "id": 4270824368,
+      "name": "Five Epochs of the Navy",
+      "size": 30,
+      "duplicateRate": 1,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA023_BD098_2289c55118c63e95c117ff80e507a045a52944705994f9d0b0fe8c24c5ab6344.png"
+    },
+    {
+      "id": 4268727216,
+      "name": "German Destroyers",
+      "size": 16,
+      "duplicateRate": 4,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA025_GERDD_1004_fc5cfd128c70e7f8a4a3222be45a608638e488dee696948f71755f8e3aea346e.png"
+    },
+    {
+      "id": 4271872944,
+      "name": "German Navy",
+      "size": 36,
+      "duplicateRate": 4,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA022_GF097_4618d06c9de548ce25f0708029bc43d4a1bbeac6c7e52c81e236802c0735bb86.png"
+    },
+    {
+      "id": 4259290032,
+      "name": "Heroic Clash",
+      "size": 60,
+      "duplicateRate": 2,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA034_Jap_BB_EA_Dragons_f4c104e224d2448c709f0af17faa9622b10d61f61ed38eda5ebd2c329b2276f7.png"
+    },
+    {
+      "id": 4287601584,
+      "name": "High School Fleet",
+      "size": 35,
+      "duplicateRate": 5,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA007_HSF2018_b1fd5492a2602502f81e2e6fa52c2ea461500ac41dfcb22d2ec9ca074538da23.png"
+    },
+    {
+      "id": 4247755696,
+      "name": "Honor, Integrity, Virtue",
+      "size": 60,
+      "duplicateRate": 2,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA045_CMW_Legendary_5da2632c1c5530f546f6e0cc3d10a8678c04adb0f450fb5c1511e37a6b560c02.png"
+    },
+    {
+      "id": 4278164400,
+      "name": "In the Service of the Motherland",
+      "size": 32,
+      "duplicateRate": 5,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA016_SovietBBArc_49f1614e69255bacde978b3ffb1fbec10f5cc71e0c47b929becd50500424c405.png"
+    },
+    {
+      "id": 4264532912,
+      "name": "Italian Destroyers",
+      "size": 18,
+      "duplicateRate": 4,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA029_ITDD_0_11_3_98e8357622fa04efe7c8c9c3b231569c142031f3f832cc4134bcdb406c309671.png"
+    },
+    {
+      "id": 4273970096,
+      "name": "King of the Sea",
+      "size": 16,
+      "duplicateRate": 1,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA020_Kots_b44c5a0e2c1adf1276916e54ae87388adcec4f2cc08d0639c5847ae2c37d1b1e.png"
+    },
+    {
+      "id": 4248804272,
+      "name": "Legend of Sabaton",
+      "size": 20,
+      "duplicateRate": 4,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA044_Sabaton_1c12d20f1e191ca844dd2dd33ea477a133bfcc020d6016b809ad29ff1ad183ec.png"
+    },
+    {
+      "id": 4277115824,
+      "name": "Legion of Honor",
+      "size": 16,
+      "duplicateRate": 5,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA017_FrenchDDArc_2a2a281a6e750aa8bbfd37574af7f0d18eb6d4c8f6b32e1a5991b7f63626595a.png"
+    },
+    {
+      "id": 4252998576,
+      "name": "Liberty Harbor",
+      "size": 60,
+      "duplicateRate": 1,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA040_USA250_puzzle_9b9f61f846c3a61d263b14b653baebbf3c52d5a06c27aec2b0010e3f458c9790.png"
+    },
+    {
+      "id": 4280261552,
+      "name": "Naval Aviation",
+      "size": 16,
+      "duplicateRate": 5,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA014_BritishCVArc_a7c0b644952e498e33e650351d438aee9bd163b6422d672860ebc24b54a2cd79.png"
+    },
+    {
+      "id": 4246707120,
+      "name": "Operation Rheinübung",
+      "size": 4,
+      "duplicateRate": 1,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA046_Hunt_Bismarck_8a41a0b979c0023033e5d531b6db54121c452ca9b32408745895a017f519e368.png"
+    },
+    {
+      "id": 4276067248,
+      "name": "Resolute and Rapid",
+      "size": 16,
+      "duplicateRate": 4,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA018_ITCA_0810_3a1d7e0e7666187ac5cb513b10da9cdb46fe86c6b1a9f5d04bf8d3727ff5ca8e.png"
+    },
+    {
+      "id": 4282358704,
+      "name": "Royal Navy Destroyers",
+      "size": 16,
+      "duplicateRate": 5,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA012_BritishArc_3323b81a85b2546c774f2e3a602c261e743a36740bad966a6a47583a102eb289.png"
+    },
+    {
+      "id": 4289698736,
+      "name": "Second Game Anniversary",
+      "size": 16,
+      "duplicateRate": 2,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA005_HappyBirthday_860453e39a7552109d7c70e380687affb193b17fbf94205d6d9df3057d11e216.png"
+    },
+    {
+      "id": 4262435760,
+      "name": "Seven Seas",
+      "size": 16,
+      "duplicateRate": 1,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA031_BD2022_QUEST_7db6f0c3927311c6cb600c48b0c0fb5853ac0ff3179cb92f9e7f6d0d52755041.png"
+    },
+    {
+      "id": 4275018672,
+      "name": "Shipbuilding",
+      "size": 20,
+      "duplicateRate": 4,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA019_HappyNewYear2020_9726cb46f60c8c8c88ee55f96830296f4efbdb914c70394663122b202a322dad.png"
+    },
+    {
+      "id": 4267678640,
+      "name": "Sixth Game Anniversary",
+      "size": 60,
+      "duplicateRate": 1,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA026_BD6_1008_67e623b273b058107a523e36f5cd1580d0608330bba923f26bb5c884911350c2.png"
+    },
+    {
+      "id": 4257192880,
+      "name": "Space, the Final Frontier",
+      "size": 16,
+      "duplicateRate": 1,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA036_Star_Trek_1310_e383596f4d8725184e6decd96bc75021a52ec09cb09a27ca5b7ba66d3beee09d.png"
+    },
+    {
+      "id": 4255095728,
+      "name": "Still Standing",
+      "size": 4,
+      "duplicateRate": 1,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA038_From_The_Bottom_216c707cd5dc1b370be9f1ddd3fb653c3fc8dca29c72184ec2d27bbe3af052de.png"
+    },
+    {
+      "id": 4261387184,
+      "name": "The Age of Sa Zhenbing",
+      "size": 20,
+      "duplicateRate": 4,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA032_PA_SAZHENBING_6700ff0480c65235df0c95b9a2ab9c3ba4c8fd3aa03575633b1928c87f66d34a.png"
+    },
+    {
+      "id": 4283407280,
+      "name": "The Great Eight",
+      "size": 12,
+      "duplicateRate": 5,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA011_Ovechkin_d5d901c89bc6c90ace9fa2debb9b04979dddc8834f36e523739601745089184a.png"
+    },
+    {
+      "id": 4292844464,
+      "name": "The Hunt for Bismarck",
+      "size": 24,
+      "duplicateRate": 4,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA002_Bismarck_1c55b977ae6a548aab406ac2318549df782d24fd73cf9cbb450f3bc888015df1.png"
+    },
+    {
+      "id": 4266630064,
+      "name": "The Transformers: The Movie 35th Anniversary",
+      "size": 32,
+      "duplicateRate": 4,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA027_TFTM_108_ac99968be752bc0e4839c554ed3372e90a5736ae672ff1f6532cf44f9bf117ed.png"
+    },
+    {
+      "id": 4284455856,
+      "name": "Third Game Anniversary",
+      "size": 16,
+      "duplicateRate": 3,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA010_HappyBirthday2018_47d71bf1f0070cea1d0fa29aff964904f1bc43be7e4b5d4af96c6b35ffe7ff58.png"
+    },
+    {
+      "id": 4250901424,
+      "name": "Unfailing Devotion",
+      "size": 4,
+      "duplicateRate": 1,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA042_Bottom_Yamato_77ff7c799925e7c1551595537fc42db16a3039b0be3ea83297289412815a4dc0.png"
+    },
+    {
+      "id": 4286553008,
+      "name": "Vive la France",
+      "size": 18,
+      "duplicateRate": 3,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA008_Vivalafrance_c31ecf1515424fa0a4427a17976bffdabb580d424cdde41f993683b5c213b58f.png"
+    },
+    {
+      "id": 4290747312,
+      "name": "Yamamoto Isoroku",
+      "size": 40,
+      "duplicateRate": 5,
+      "image": "https://wows-gloss-icons.wgcdn.co/icons/collections/album_icons/small/collection_token_PCZA004_Yamamoto_4067f9f51620319ba4fede3fe17f235e286f2a73556554a90e8e70d0f343875a.png"
+    }
+  ]
+}
