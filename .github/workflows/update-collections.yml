@@ -33,7 +33,7 @@ jobs:
       - name: Generate collection data
         env:
           WG_APPLICATION_ID: ${{ secrets.WG_APPLICATION_ID }}
-        run: node update-collections
+        run: node scripts/update-collections.js
 
       - name: Commit updated data
         id: changes
