@@ -3,9 +3,10 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "update-collections": "node scripts/update-collections.js"
+        "update-collections": "node scripts/update-collections.js",
+        "generate-social-preview": "node scripts/generate-social-preview.js"
     },
     "devDependencies": {
-        "vitest": "^3.2.4"
+        "playwright": "1.58.0"
     }
 }

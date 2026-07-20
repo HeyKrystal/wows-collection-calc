@@ -53,9 +53,23 @@ A very typical example for a brand new 16-element collection:
     Duplicates: 0
     Elements Per Container: 1
 
+    
+
 ## Hosting
 This project is a completely static HTML, CSS, and JavaScript application and can be hosted using GitHub Pages or any standard web server.
 Collection dataset will change overtime and API access is required to keep those updated.
+
+## Collection Metadata
+
+Collection information is automatically updated from the Wargaming API.
+
+A scheduled GitHub Action:
+- Downloads collection metadata
+- Counts collection elements
+- Produces a minimal JSON file for the website
+- Commits changes only when metadata has changed
+
+No API key is required to use the calculator.
 
 ## Issues
 This is primarily a personal project. If there are obviously valid problems or issues with the calculations, feel free to open an issue and I will try my best to get to it.
