@@ -257,8 +257,8 @@ a:hover {
     overflow: hidden;
 }
 
-.about-panel > summary,
-.advanced-results > summary {
+.about-panel>summary,
+.advanced-results>summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -268,20 +268,19 @@ a:hover {
     user-select: none;
 }
 
-.about-panel > summary::-webkit-details-marker,
-.advanced-results > summary::-webkit-details-marker {
+.about-panel>summary::-webkit-details-marker,
+.advanced-results>summary::-webkit-details-marker {
     display: none;
 }
 
-.about-panel > summary {
+.about-panel>summary {
     position: relative;
     padding: 15px 20px;
     color: var(--heading);
     font-weight: 800;
 }
 
-.about-panel > summary::after,
-.advanced-results > summary::after {
+.advanced-results>summary::after {
     flex: 0 0 auto;
     display: grid;
     place-items: center;
@@ -294,44 +293,75 @@ a:hover {
 }
 
 /*
- * The About panel uses one down-arrowhead glyph and rotates the same glyph
- * when expanded. Tweak the translate values here if a particular font or
- * browser makes the arrow look a pixel off-center.
+ * Disclosure indicator.
+ *
+ * The circular frame remains stationary while the two arms unfold from
+ * a downward chevron, pass through horizontal, and refold upward.
  */
-.about-panel > summary::after {
-    content: "⌄";
-    font-family: Arial, sans-serif;
-    font-size: 1.35rem;
-    font-weight: 700;
-    line-height: 1;
-    transform: translate(1px, -2px) rotate(0deg);
-    transform-origin: center;
-    transition:
-        transform 220ms cubic-bezier(0.2, 0.75, 0.25, 1),
-        background-color 160ms ease;
+.details-indicator {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--blue);
+    background: var(--panel-soft);
 }
 
-.about-panel[open] > summary::after {
-    transform: translate(1px, -2px) rotate(180deg);
+.details-indicator-symbol {
+    --arm-overlap: 0.75px;
+
+    position: relative;
+    width: 16px;
+    height: 12px;
+
+    transform: translateY(3.5px);
+    transition: transform 300ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
-.advanced-results > summary::after {
-    content: "+";
-    font-size: 1.15rem;
-    font-weight: 500;
-    transition: transform 160ms ease, background-color 160ms ease;
+details[open] > summary .details-indicator-symbol {
+    transform: translateY(-3.5px);
 }
 
-.advanced-results[open] > summary::after {
-    content: "−";
+.details-indicator-arm {
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+
+    transition: transform 300ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.details-indicator-arm-left {
+    right: calc(50% - var(--arm-overlap));
+    transform-origin: right center;
+    transform: rotate(45deg);
+}
+
+.details-indicator-arm-right {
+    left: calc(50% - var(--arm-overlap));
+    transform-origin: left center;
+    transform: rotate(-45deg);
+}
+
+details[open] > summary .details-indicator-arm-left {
+    transform: rotate(-45deg);
+}
+
+details[open] > summary .details-indicator-arm-right {
+    transform: rotate(45deg);
 }
 
 /*
- * Animate the native details content without hard-coding a max height.
- * Browsers that do not support ::details-content simply fall back to the
- * normal instant details behavior.
+ * Animate disclosure content without hard-coding a maximum height.
+ * Unsupported browsers fall back to the native instant details behavior.
  */
-.about-panel::details-content {
+.about-panel::details-content,
+.advanced-results::details-content {
     block-size: 0;
     overflow: hidden;
     opacity: 0;
@@ -342,18 +372,19 @@ a:hover {
     transition-behavior: allow-discrete;
 }
 
-.about-panel[open]::details-content {
+.about-panel[open]::details-content,
+.advanced-results[open]::details-content {
     block-size: auto;
     opacity: 1;
 }
 
-.about-panel > summary:hover,
-.advanced-results > summary:hover {
+.about-panel>summary:hover,
+.advanced-results>summary:hover {
     background: var(--surface-hover);
 }
 
-.about-panel > summary small,
-.advanced-results > summary small {
+.about-panel>summary small,
+.advanced-results>summary small {
     margin-left: auto;
     color: var(--muted);
     font-size: 0.78rem;
@@ -376,7 +407,7 @@ a:hover {
     letter-spacing: -0.025em;
 }
 
-.about-intro > p:last-child {
+.about-intro>p:last-child {
     margin: 10px 0 0;
     color: var(--muted-strong);
     line-height: 1.65;
@@ -511,7 +542,7 @@ a:hover {
     letter-spacing: -0.025em;
 }
 
-.panel-heading > p:last-child {
+.panel-heading>p:last-child {
     margin: 6px 0 0;
     color: var(--muted);
     font-size: 0.87rem;
@@ -587,7 +618,7 @@ a:hover {
     min-width: 0;
 }
 
-.field + .field {
+.field+.field {
     margin-top: 12px;
 }
 
@@ -597,7 +628,7 @@ a:hover {
     gap: 12px;
 }
 
-.field-row .field + .field {
+.field-row .field+.field {
     margin-top: 0;
 }
 
@@ -636,7 +667,7 @@ select {
     outline: none;
     color: var(--text);
     background: var(--input-bg);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
     transition: border-color 130ms ease, box-shadow 130ms ease, background-color 130ms ease;
 }
 
@@ -717,21 +748,21 @@ input[type="checkbox"] {
     height: 18px;
     border-radius: 50%;
     background: var(--muted);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: transform 150ms ease, background-color 150ms ease;
 }
 
-.switch-control input:checked + .switch-track {
+.switch-control input:checked+.switch-track {
     border-color: var(--blue);
     background: var(--blue-soft);
 }
 
-.switch-control input:checked + .switch-track .switch-thumb {
+.switch-control input:checked+.switch-track .switch-thumb {
     transform: translateX(20px);
     background: var(--blue);
 }
 
-.switch-control input:focus-visible + .switch-track {
+.switch-control input:focus-visible+.switch-track {
     box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
@@ -841,7 +872,7 @@ input[type="checkbox"] {
     overflow-y: auto;
     list-style: none;
     background: var(--panel-solid);
-    box-shadow: 0 18px 44px rgba(0,0,0,0.18);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.18);
 }
 
 .combobox-option {
@@ -923,8 +954,8 @@ input[type="checkbox"] {
 
 .primary-button:focus-visible,
 .theme-options button:focus-visible,
-.about-panel > summary:focus-visible,
-.advanced-results > summary:focus-visible {
+.about-panel>summary:focus-visible,
+.advanced-results>summary:focus-visible {
     outline: 3px solid var(--focus-ring);
     outline-offset: 2px;
 }
@@ -1119,14 +1150,14 @@ input[type="checkbox"] {
     background: var(--panel-soft);
 }
 
-.advanced-results > summary {
+.advanced-results>summary {
     padding: 11px 12px;
     color: var(--heading);
     font-size: 0.78rem;
     font-weight: 800;
 }
 
-.advanced-results > summary::after {
+.advanced-results>summary::after {
     width: 23px;
     height: 23px;
     font-size: 0.95rem;
@@ -1279,7 +1310,7 @@ input[type="checkbox"] {
 .theme-options button[aria-pressed="true"] {
     color: var(--heading);
     background: var(--panel-raised);
-    box-shadow: 0 2px 7px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
 }
 
 .hidden {
@@ -1330,12 +1361,12 @@ input[type="checkbox"] {
         grid-template-columns: 1fr;
     }
 
-    .about-panel > summary {
+    .about-panel>summary {
         align-items: flex-start;
     }
 
-    .about-panel > summary small,
-    .advanced-results > summary small {
+    .about-panel>summary small,
+    .advanced-results>summary small {
         display: none;
     }
 
@@ -1349,7 +1380,7 @@ input[type="checkbox"] {
         grid-template-columns: 1fr;
     }
 
-    .field-row-three .field + .field {
+    .field-row-three .field+.field {
         margin-top: 0;
     }
 
@@ -1400,7 +1431,7 @@ input[type="checkbox"] {
         line-height: 1.45;
     }
 
-    .about-panel > summary {
+    .about-panel>summary {
         padding: 13px 15px;
         font-size: 0.85rem;
     }
@@ -1427,7 +1458,7 @@ input[type="checkbox"] {
         grid-template-columns: 1fr;
     }
 
-    .field-row .field + .field {
+    .field-row .field+.field {
         margin-top: 0;
     }
 
@@ -1494,6 +1525,7 @@ input[type="checkbox"] {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -1506,8 +1538,9 @@ input[type="checkbox"] {
 
 
 @media (prefers-reduced-motion: reduce) {
+
     .about-panel::details-content,
-    .about-panel > summary::after {
+    .about-panel>summary::after {
         transition: none;
     }
 }

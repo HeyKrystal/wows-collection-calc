@@ -1,11 +1,13 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <title>Collections Calc | World of Warships Collection Calculator</title>
-    <meta name="description" content="Free unofficial World of Warships collection calculator. Estimate how many containers you may need to complete a collection, including duplicate exchanges and optional resource costs.">
+    <meta name="description"
+        content="Free unofficial World of Warships collection calculator. Estimate how many containers you may need to complete a collection, including duplicate exchanges and optional resource costs.">
     <meta name="application-name" content="Collections Calc">
     <meta name="author" content="HeyKrystal">
     <meta name="robots" content="index,follow">
@@ -20,7 +22,8 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="Collections Calc">
     <meta property="og:title" content="Collections Calc | World of Warships Collection Calculator">
-    <meta property="og:description" content="Estimate how many containers you may need to complete a World of Warships collection, including duplicate exchanges and optional resource costs.">
+    <meta property="og:description"
+        content="Estimate how many containers you may need to complete a World of Warships collection, including duplicate exchanges and optional resource costs.">
     <meta property="og:url" content="https://wowscollections.krstldv.com/">
     <meta property="og:image" content="https://wowscollections.krstldv.com/images/social-preview.png">
     <meta property="og:image:width" content="1200">
@@ -29,7 +32,8 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Collections Calc | World of Warships Collection Calculator">
-    <meta name="twitter:description" content="Estimate how many containers you may need to complete a World of Warships collection, including duplicate exchanges and optional resource costs.">
+    <meta name="twitter:description"
+        content="Estimate how many containers you may need to complete a World of Warships collection, including duplicate exchanges and optional resource costs.">
     <meta name="twitter:image" content="https://wowscollections.krstldv.com/images/social-preview.png">
     <meta name="twitter:image:alt" content="Collections Calc, a World of Warships collection container estimator">
 
@@ -101,6 +105,7 @@
 
     <link rel="stylesheet" href="styles/styles.css">
 </head>
+
 <body>
     <div class="page-background" aria-hidden="true"></div>
 
@@ -121,6 +126,13 @@
             <summary>
                 <span>About &amp; Quick Start</span>
                 <small>How to use the calculator and read the estimate</small>
+
+                <span class="details-indicator" aria-hidden="true">
+                    <span class="details-indicator-symbol">
+                        <span class="details-indicator-arm details-indicator-arm-left"></span>
+                        <span class="details-indicator-arm details-indicator-arm-right"></span>
+                    </span>
+                </span>
             </summary>
             <div class="about-content">
                 <section class="about-intro">
@@ -139,7 +151,8 @@
                         <ol class="quick-start-list">
                             <li>Search for a known collection, or enter its size and duplicate rate manually.</li>
                             <li>Enter the elements, collection tokens, and duplicate progress you already have.</li>
-                            <li>Set the container details and optional cost, then choose <strong>Calculate Estimate</strong>.</li>
+                            <li>Set the container details and optional cost, then choose <strong>Calculate
+                                    Estimate</strong>.</li>
                             <li>Use the expected range as a planning guide and acquire containers gradually.</li>
                         </ol>
                     </section>
@@ -171,7 +184,8 @@
                 <div class="about-note about-note-warning" role="note">
                     <strong>Plan with the estimate, not against RNG.</strong>
                     These values are forecasting tools, not guarantees. Acquire containers gradually when possible to
-                    avoid over-purchasing. The calculator assumes you save collection tokens until they can finish the collection.
+                    avoid over-purchasing. The calculator assumes you save collection tokens until they can finish the
+                    collection.
                 </div>
             </div>
         </details>
@@ -246,14 +260,17 @@
                             <div class="field">
                                 <label for="elementsCollected">
                                     Elements Collected
-                                    <span class="tooltip" tabindex="0" data-tip="Number of elements you already own.">?</span>
+                                    <span class="tooltip" tabindex="0"
+                                        data-tip="Number of elements you already own.">?</span>
                                 </label>
-                                <input id="elementsCollected" type="number" min="0" max="256" step="1" value="0" required>
+                                <input id="elementsCollected" type="number" min="0" max="256" step="1" value="0"
+                                    required>
                             </div>
                             <div class="field">
                                 <label for="collectionTokens">
                                     Collection Tokens
-                                    <span class="tooltip" tabindex="0" data-tip="Number of collection tokens you currently have available.">?</span>
+                                    <span class="tooltip" tabindex="0"
+                                        data-tip="Number of collection tokens you currently have available.">?</span>
                                 </label>
                                 <input id="collectionTokens" type="number" min="0" step="1" value="0" required>
                             </div>
@@ -299,7 +316,8 @@
                                     <span class="tooltip" tabindex="0"
                                         data-tip="How many collection elements each container grants. Leave this set to one for daily or standard containers.">?</span>
                                 </label>
-                                <input id="elementsPerContainer" type="number" min="1" max="100" step="1" value="1" required>
+                                <input id="elementsPerContainer" type="number" min="1" max="100" step="1" value="1"
+                                    required>
                             </div>
                             <div class="field">
                                 <label for="containerCost">
@@ -343,7 +361,8 @@
                         </div>
                         <div id="expectedRange" class="result-value primary">-</div>
                         <p class="explanation">
-                            A typical result starts at the lower number. The upper number is a more conservative target for less favorable luck.
+                            A typical result starts at the lower number. The upper number is a more conservative target
+                            for less favorable luck.
                         </p>
                     </section>
 
@@ -379,7 +398,13 @@
                     <details class="advanced-results">
                         <summary>
                             <span>Extra Stats for Nerds</span>
-                            <small>Best, worst, average, and simulation details</small>
+
+                            <span class="details-indicator" aria-hidden="true">
+                                <span class="details-indicator-symbol">
+                                    <span class="details-indicator-arm details-indicator-arm-left"></span>
+                                    <span class="details-indicator-arm details-indicator-arm-right"></span>
+                                </span>
+                            </span>
                         </summary>
                         <div class="details-body">
                             <div class="advanced-grid">
@@ -422,7 +447,8 @@
                 <span aria-hidden="true">•</span>
                 <span>Not affiliated with Wargaming</span>
                 <span aria-hidden="true">•</span>
-                <a href="https://github.com/HeyKrystal/wows-collection-calc" target="_blank" rel="noopener noreferrer">Open Source on GitHub</a>
+                <a href="https://github.com/HeyKrystal/wows-collection-calc" target="_blank"
+                    rel="noopener noreferrer">Open Source on GitHub</a>
             </div>
 
             <div class="theme-control" aria-label="Theme preference">
@@ -439,4 +465,5 @@
     <script type="module" src="src/theme.js"></script>
     <script type="module" src="src/ui.js"></script>
 </body>
+
 </html>
