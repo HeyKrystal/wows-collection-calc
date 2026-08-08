@@ -257,8 +257,8 @@ a:hover {
     overflow: hidden;
 }
 
-.about-panel>summary,
-.advanced-results>summary {
+.about-panel > summary,
+.advanced-results > summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -268,37 +268,31 @@ a:hover {
     user-select: none;
 }
 
-.about-panel>summary::-webkit-details-marker,
-.advanced-results>summary::-webkit-details-marker {
+.about-panel > summary::-webkit-details-marker,
+.advanced-results > summary::-webkit-details-marker {
     display: none;
 }
 
-.about-panel>summary {
+.about-panel > summary {
     position: relative;
     padding: 15px 20px;
     color: var(--heading);
     font-weight: 800;
 }
 
-.advanced-results>summary::after {
-    flex: 0 0 auto;
-    display: grid;
-    place-items: center;
-    width: 28px;
-    height: 28px;
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    color: var(--blue);
-    background: var(--panel-soft);
-}
-
 /*
  * Disclosure indicator.
  *
- * The circular frame remains stationary while the two arms unfold from
- * a downward chevron, pass through horizontal, and refold upward.
+ * The circular frame remains stationary while the two arms unfold from a
+ * downward chevron, pass through horizontal, and refold upward. The custom
+ * properties below keep the animation geometry and timing easy to tune.
  */
 .details-indicator {
+    --indicator-duration: 300ms;
+    --indicator-easing: cubic-bezier(0.2, 0.75, 0.25, 1);
+    --indicator-hinge-offset: 3.5px;
+    --indicator-arm-overlap: 0.75px;
+
     flex: 0 0 auto;
     display: grid;
     place-items: center;
@@ -311,18 +305,15 @@ a:hover {
 }
 
 .details-indicator-symbol {
-    --arm-overlap: 0.75px;
-
     position: relative;
     width: 16px;
     height: 12px;
-
-    transform: translateY(3.5px);
-    transition: transform 300ms cubic-bezier(0.2, 0.75, 0.25, 1);
+    transform: translateY(var(--indicator-hinge-offset));
+    transition: transform var(--indicator-duration) var(--indicator-easing);
 }
 
 details[open] > summary .details-indicator-symbol {
-    transform: translateY(-3.5px);
+    transform: translateY(calc(0px - var(--indicator-hinge-offset)));
 }
 
 .details-indicator-arm {
@@ -332,20 +323,19 @@ details[open] > summary .details-indicator-symbol {
     height: 2px;
     border-radius: 999px;
     background: currentColor;
-
-    transition: transform 300ms cubic-bezier(0.2, 0.75, 0.25, 1);
+    transition: transform var(--indicator-duration) var(--indicator-easing);
 }
 
 .details-indicator-arm-left {
-    right: calc(50% - var(--arm-overlap));
-    transform-origin: right center;
+    right: calc(50% - var(--indicator-arm-overlap));
     transform: rotate(45deg);
+    transform-origin: right center;
 }
 
 .details-indicator-arm-right {
-    left: calc(50% - var(--arm-overlap));
-    transform-origin: left center;
+    left: calc(50% - var(--indicator-arm-overlap));
     transform: rotate(-45deg);
+    transform-origin: left center;
 }
 
 details[open] > summary .details-indicator-arm-left {
@@ -378,13 +368,12 @@ details[open] > summary .details-indicator-arm-right {
     opacity: 1;
 }
 
-.about-panel>summary:hover,
-.advanced-results>summary:hover {
+.about-panel > summary:hover,
+.advanced-results > summary:hover {
     background: var(--surface-hover);
 }
 
-.about-panel>summary small,
-.advanced-results>summary small {
+.about-panel > summary small {
     margin-left: auto;
     color: var(--muted);
     font-size: 0.78rem;
@@ -690,7 +679,6 @@ input[type="checkbox"] {
     accent-color: var(--blue);
 }
 
-
 .daily-toggle-row {
     display: flex;
     align-items: center;
@@ -954,8 +942,8 @@ input[type="checkbox"] {
 
 .primary-button:focus-visible,
 .theme-options button:focus-visible,
-.about-panel>summary:focus-visible,
-.advanced-results>summary:focus-visible {
+.about-panel > summary:focus-visible,
+.advanced-results > summary:focus-visible {
     outline: 3px solid var(--focus-ring);
     outline-offset: 2px;
 }
@@ -1150,17 +1138,11 @@ input[type="checkbox"] {
     background: var(--panel-soft);
 }
 
-.advanced-results>summary {
+.advanced-results > summary {
     padding: 11px 12px;
     color: var(--heading);
     font-size: 0.78rem;
     font-weight: 800;
-}
-
-.advanced-results>summary::after {
-    width: 23px;
-    height: 23px;
-    font-size: 0.95rem;
 }
 
 .details-body {
@@ -1361,12 +1343,11 @@ input[type="checkbox"] {
         grid-template-columns: 1fr;
     }
 
-    .about-panel>summary {
+    .about-panel > summary {
         align-items: flex-start;
     }
 
-    .about-panel>summary small,
-    .advanced-results>summary small {
+    .about-panel > summary small {
         display: none;
     }
 
@@ -1431,7 +1412,7 @@ input[type="checkbox"] {
         line-height: 1.45;
     }
 
-    .about-panel>summary {
+    .about-panel > summary {
         padding: 13px 15px;
         font-size: 0.85rem;
     }
@@ -1439,7 +1420,6 @@ input[type="checkbox"] {
     .about-content {
         padding: 3px 14px 14px;
     }
-
 
     .input-panel,
     .estimate-panel {
@@ -1461,7 +1441,6 @@ input[type="checkbox"] {
     .field-row .field+.field {
         margin-top: 0;
     }
-
 
     .daily-toggle-row {
         align-items: center;
@@ -1525,7 +1504,6 @@ input[type="checkbox"] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
     *,
     *::before,
     *::after {
@@ -1534,13 +1512,9 @@ input[type="checkbox"] {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
     }
-}
-
-
-@media (prefers-reduced-motion: reduce) {
 
     .about-panel::details-content,
-    .about-panel>summary::after {
+    .advanced-results::details-content {
         transition: none;
     }
 }

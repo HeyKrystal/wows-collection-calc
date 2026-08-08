@@ -3,8 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Social Preview</title>
-
     <style>
+        :root {
+            color-scheme: dark;
+
+            --page-bg: #0c1420;
+            --page-bg-deep: #07101a;
+            --page-glow-blue: rgba(0, 166, 231, 0.16);
+            --page-glow-orange: rgba(255, 126, 29, 0.12);
+            --page-texture-opacity: 0.12;
+
+            --panel: rgba(19, 31, 45, 0.91);
+            --panel-soft: rgba(31, 48, 64, 0.73);
+            --heading: #f6fafc;
+            --text: #e9f1f6;
+            --muted: #9eb0bd;
+            --muted-strong: #c0ccd4;
+            --border: rgba(171, 204, 225, 0.14);
+            --blue: #38bdf8;
+            --blue-soft: rgba(56, 189, 248, 0.13);
+            --orange: #fb8b3d;
+            --orange-soft: rgba(251, 139, 61, 0.13);
+            --shadow-panel: 0 20px 54px rgba(0, 0, 0, 0.25);
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -18,133 +40,146 @@
         }
 
         body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-family:
-                Inter,
-                system-ui,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                sans-serif;
-
-            color: #f8fafc;
-
+            position: relative;
+            isolation: isolate;
+            display: grid;
+            place-items: center;
+            color: var(--text);
+            font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             background:
-                radial-gradient(
-                    circle at 80% 20%,
-                    rgba(56, 189, 248, 0.18),
-                    transparent 38%
-                ),
-                linear-gradient(
-                    135deg,
-                    #020617 0%,
-                    #0f172a 55%,
-                    #172554 100%
-                );
+                radial-gradient(circle at 10% -8%, var(--page-glow-blue), transparent 31rem),
+                radial-gradient(circle at 92% 8%, var(--page-glow-orange), transparent 28rem),
+                linear-gradient(155deg, var(--page-bg), var(--page-bg-deep));
+        }
+
+        .page-background {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            background-image: url("https://images.unsplash.com/photo-1708342421457-9c59f4843fe1?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: var(--page-texture-opacity);
         }
 
         .preview {
-            width: 1060px;
+            position: relative;
             display: grid;
-            grid-template-columns: 300px 1fr;
+            grid-template-columns: 280px minmax(0, 1fr);
             align-items: center;
-            gap: 80px;
+            gap: 62px;
+            width: 1060px;
+            min-height: 430px;
+            padding: 54px 62px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            background: var(--panel);
+            box-shadow: var(--shadow-panel);
+        }
+
+        .preview::after {
+            content: "";
+            position: absolute;
+            top: -170px;
+            right: -100px;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 45% 45%, var(--orange-soft), transparent 58%),
+                radial-gradient(circle at 70% 65%, var(--blue-soft), transparent 62%);
+            pointer-events: none;
+        }
+
+        .logo,
+        .copy {
+            position: relative;
+            z-index: 1;
         }
 
         .logo {
-            width: 360px;
-            height: 360px;
+            display: block;
+            width: 280px;
+            height: 280px;
             object-fit: contain;
-            filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.5));
+            filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.35));
         }
 
         .eyebrow {
-            margin: 0 0 12px;
-
-            color: #7dd3fc;
-            font-size: 28px;
-            font-weight: 650;
-            letter-spacing: 0.08em;
+            margin: 0 0 10px;
+            color: var(--orange);
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
         }
 
         h1 {
-            max-width: 700px;
             margin: 0;
-
-            font-size: 70px;
-            line-height: 1.02;
-            letter-spacing: -0.035em;
+            color: var(--heading);
+            font-size: 66px;
+            line-height: 0.98;
+            letter-spacing: -0.045em;
         }
 
         .description {
-            max-width: 690px;
-            margin: 28px 0 0;
-
-            color: #cbd5e1;
-            font-size: 29px;
-            line-height: 1.38;
+            max-width: 620px;
+            margin: 22px 0 0;
+            color: var(--muted-strong);
+            font-size: 25px;
+            line-height: 1.42;
         }
 
         .features {
             display: flex;
-            gap: 16px;
-            margin-top: 32px;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
         }
 
         .feature {
-            padding: 10px 16px;
-
-            color: #bae6fd;
-            font-size: 19px;
-            font-weight: 600;
-
-            background: rgba(14, 165, 233, 0.12);
-            border: 1px solid rgba(125, 211, 252, 0.28);
+            padding: 9px 14px;
+            border: 1px solid var(--border);
             border-radius: 999px;
+            color: var(--blue);
+            background: var(--panel-soft);
+            font-size: 17px;
+            font-weight: 750;
         }
 
         .url {
             position: absolute;
             right: 48px;
-            bottom: 36px;
-
-            color: #94a3b8;
-            font-size: 18px;
+            bottom: 34px;
+            color: var(--muted);
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: 0.01em;
         }
     </style>
 </head>
-
 <body>
+    <div class="page-background" aria-hidden="true"></div>
+
     <main class="preview">
-        <img
-            class="logo"
-            src="images/app-icon.png"
-            alt=""
-        >
+        <img class="logo" src="images/app-icon.png" alt="">
 
-        <div>
+        <div class="copy">
             <p class="eyebrow">World of Warships</p>
-
-            <h1>Collection Calc</h1>
-
+            <h1>Collections Calc</h1>
             <p class="description">
-                Estimate how many containers and resources are needed to complete a collection.
+                Estimate how many containers and resources you may need to finish a collection.
             </p>
-
             <div class="features">
-                <span class="feature">Collection presets</span>
-                <span class="feature">Container estimate</span>
-                <span class="feature">Cost range</span>
+                <span class="feature">Collection lookup</span>
+                <span class="feature">Container estimates</span>
+                <span class="feature">Approximate costs</span>
             </div>
         </div>
     </main>
 
-    <div class="url">
-        heykrystal.github.io/wows-collection-calc
-    </div>
+    <div class="url">wowscollections.krstldv.com</div>
 </body>
 </html>
