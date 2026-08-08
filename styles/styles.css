@@ -5,7 +5,7 @@
     --page-bg-deep: #dce9f1;
     --page-glow-blue: rgba(25, 170, 230, 0.19);
     --page-glow-orange: rgba(255, 132, 37, 0.17);
-    --page-texture-opacity: 0.16;
+    --page-texture-opacity: 0.05;
 
     --panel: rgba(250, 253, 255, 0.92);
     --panel-solid: #f9fcfe;
@@ -54,7 +54,7 @@
     --page-bg-deep: #07101a;
     --page-glow-blue: rgba(0, 166, 231, 0.16);
     --page-glow-orange: rgba(255, 126, 29, 0.12);
-    --page-texture-opacity: 0.12;
+    --page-texture-opacity: 0.02;
 
     --panel: rgba(19, 31, 45, 0.91);
     --panel-solid: #142231;
