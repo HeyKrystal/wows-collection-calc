@@ -89,7 +89,7 @@ export function validateConfig(config) {
         return `Duplicate Rate must be between 1 and ${CONSTANTS.MAX_DUPLICATE_RATE}.`;
     }
     if (!Number.isInteger(config.duplicates) || config.duplicates < 0 || config.duplicates >= config.duplicateRate) {
-        return "Duplicates must be greater than 0 and less that the Duplicate Exchange Rate.";
+        return "Duplicates must be less than the Duplicate Exchange Rate.";
     }
 
     if (!Number.isInteger(config.elementsPerContainer) || config.elementsPerContainer < 1 || config.elementsPerContainer > CONSTANTS.MAX_ELEMENTS_PER_CONTAINER) {

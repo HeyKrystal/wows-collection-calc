@@ -11,7 +11,7 @@
     <meta name="application-name" content="Collections Calc">
     <meta name="author" content="HeyKrystal">
     <meta name="robots" content="index,follow">
-    <link rel="canonical" href="https://wowscollections.krstldv.com/">
+    <link rel="canonical" href="https://collections.krstldv.com/">
 
     <meta name="theme-color" content="#101a2b">
     <link rel="icon" href="images/favicon-32x32.png" type="image/png" sizes="32x32">
@@ -24,8 +24,8 @@
     <meta property="og:title" content="Collections Calc | World of Warships Collection Calculator">
     <meta property="og:description"
         content="Estimate how many containers you may need to complete a World of Warships collection, including duplicate exchanges and optional resource costs.">
-    <meta property="og:url" content="https://wowscollections.krstldv.com/">
-    <meta property="og:image" content="https://wowscollections.krstldv.com/images/social-preview.png">
+    <meta property="og:url" content="https://collections.krstldv.com/">
+    <meta property="og:image" content="https://collections.krstldv.com/images/social-preview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Collections Calc, a World of Warships collection container estimator">
@@ -34,7 +34,7 @@
     <meta name="twitter:title" content="Collections Calc | World of Warships Collection Calculator">
     <meta name="twitter:description"
         content="Estimate how many containers you may need to complete a World of Warships collection, including duplicate exchanges and optional resource costs.">
-    <meta name="twitter:image" content="https://wowscollections.krstldv.com/images/social-preview.png">
+    <meta name="twitter:image" content="https://collections.krstldv.com/images/social-preview.png">
     <meta name="twitter:image:alt" content="Collections Calc, a World of Warships collection container estimator">
 
     <script type="application/ld+json">
@@ -43,19 +43,19 @@
         "@graph": [
             {
                 "@type": "WebSite",
-                "@id": "https://wowscollections.krstldv.com/#website",
+                "@id": "https://collections.krstldv.com/#website",
                 "name": "Collections Calc",
                 "alternateName": "World of Warships Collections Calc",
-                "url": "https://wowscollections.krstldv.com/"
+                "url": "https://collections.krstldv.com/"
             },
             {
                 "@type": "WebApplication",
-                "@id": "https://wowscollections.krstldv.com/#app",
+                "@id": "https://collections.krstldv.com/#app",
                 "name": "Collections Calc",
                 "alternateName": "World of Warships Collection Calculator",
                 "description": "A free unofficial World of Warships collection calculator that estimates containers needed to complete collections while accounting for duplicate exchanges and optional resource costs.",
-                "url": "https://wowscollections.krstldv.com/",
-                "image": "https://wowscollections.krstldv.com/images/social-preview.png",
+                "url": "https://collections.krstldv.com/",
+                "image": "https://collections.krstldv.com/images/social-preview.png",
                 "operatingSystem": "Any web browser",
                 "applicationCategory": "GameApplication",
                 "isAccessibleForFree": true,
@@ -117,7 +117,8 @@
                 <h1>Collections Calc</h1>
                 <p class="hero-subtitle">
                     Estimate how many containers you may need to finish a collection before committing Coal,
-                    Doubloons, Community Tokens, or time to the grind.
+                    Doubloons, Community Tokens, or time to the grind. Calc is short for calculator; I'm 
+                    just using slang guys.
                 </p>
             </div>
         </header>
@@ -163,7 +164,7 @@
                             <div class="range-guide-item range-guide-typical">
                                 <span>Typical</span>
                                 <strong>50th percentile</strong>
-                                <small>Half of simulated runs finish by this point.</small>
+                                <small>Half of simulated players finish by this point.</small>
                             </div>
                             <div class="range-guide-item range-guide-conservative">
                                 <span>Conservative</span>
@@ -176,7 +177,7 @@
 
                 <div class="about-note">
                     <strong>How the estimate works:</strong>
-                    The calculator runs 500,000 simulated completions and assumes collection tokens are saved until
+                    The calculator runs 500,000 simulated collection completions and assumes collection tokens are saved until
                     enough have accumulated to finish the remaining collection. Container drops are random, so actual
                     results can still fall outside the estimate.
                 </div>
@@ -184,8 +185,8 @@
                 <div class="about-note about-note-warning" role="note">
                     <strong>Plan with the estimate, not against RNG.</strong>
                     These values are forecasting tools, not guarantees. Acquire containers gradually when possible to
-                    avoid over-purchasing. The calculator assumes you save collection tokens until they can finish the
-                    collection.
+                    avoid over-purchasing. The calculator assumes you will save collection tokens until there are enought
+                    to finish the collection.
                 </div>
             </div>
         </details>
@@ -211,8 +212,8 @@
                         <div class="field collection-field">
                             <label for="collectionSearch">
                                 Collection Name
-                                <span class="tooltip" tabindex="0"
-                                    data-tip="Search for a known collection, or leave blank to enter values manually.">?</span>
+                                <!--<span class="tooltip" tabindex="0"
+                                    data-tip="Search for a known collection, or leave blank to enter values manually.">?</span>-->
                             </label>
                             <div class="combobox">
                                 <div class="combobox-control">
@@ -278,7 +279,7 @@
                                 <label for="duplicates">
                                     Duplicates Held
                                     <span class="tooltip" tabindex="0"
-                                        data-tip="Current duplicate progress towards earning next collection token.">?</span>
+                                        data-tip="Current duplicate progress towards earning your next collection token.">?</span>
                                 </label>
                                 <input id="duplicates" type="number" min="0" step="1" value="0" required>
                             </div>
@@ -299,7 +300,7 @@
                                 <label for="isDaily" class="standalone-label">
                                     Daily Containers?
                                     <span class="tooltip" tabindex="0"
-                                        data-tip="Check this if collection elements are acquired through daily or standard containers like a subscription collection.">?</span>
+                                        data-tip="Toggle this on if collection elements are acquired through daily or standard containers like a subscription collection.">?</span>
                                 </label>
                                 <small>Uses the daily container collection-element drop behavior.</small>
                             </div>
