@@ -1,96 +1,214 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <!-- Standard -->
-    <title>WoWS Collection Calc</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="Estimate how many containers and resources are needed to complete a collection.">
-    <link rel="stylesheet" href="styles/styles.css">
 
-    <!-- Open Graph (Discord, Facebook, LinkedIn, Teams, etc.) -->
+    <title>Collections Calc | World of Warships Collection Calculator</title>
+    <meta name="description" content="Free unofficial World of Warships collection calculator. Estimate how many containers you may need to complete a collection, including duplicate exchanges and optional resource costs.">
+    <meta name="application-name" content="Collections Calc">
+    <meta name="author" content="HeyKrystal">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://wowscollections.krstldv.com/">
+
+    <meta name="theme-color" content="#101a2b">
+    <link rel="icon" href="images/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="images/app-icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
     <meta property="og:type" content="website">
-    <meta property="og:title" content="World of Warships Collection Calc">
-    <meta property="og:description"
-        content="Estimate how many containers and resources are needed to complete a collection.">
-    <meta property="og:image" content="https://heykrystal.github.io/wows-collection-calc/images/social-preview.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Collections Calc">
+    <meta property="og:title" content="Collections Calc | World of Warships Collection Calculator">
+    <meta property="og:description" content="Estimate how many containers you may need to complete a World of Warships collection, including duplicate exchanges and optional resource costs.">
+    <meta property="og:url" content="https://wowscollections.krstldv.com/">
+    <meta property="og:image" content="https://wowscollections.krstldv.com/images/social-preview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="World of Warships Collection Calculator">
-    <meta property="og:url" content="https://heykrystal.github.io/wows-collection-calc/">
+    <meta property="og:image:alt" content="Collections Calc, a World of Warships collection container estimator">
 
-    <!-- Twitter/X -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="World of Warships Collection Calc">
-    <meta name="twitter:description"
-        content="Estimate how many containers and resources are needed to complete a collection.">
-    <meta name="twitter:image" content="https://heykrystal.github.io/wows-collection-calc/images/social-preview.png">
+    <meta name="twitter:title" content="Collections Calc | World of Warships Collection Calculator">
+    <meta name="twitter:description" content="Estimate how many containers you may need to complete a World of Warships collection, including duplicate exchanges and optional resource costs.">
+    <meta name="twitter:image" content="https://wowscollections.krstldv.com/images/social-preview.png">
+    <meta name="twitter:image:alt" content="Collections Calc, a World of Warships collection container estimator">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://wowscollections.krstldv.com/#website",
+                "name": "Collections Calc",
+                "alternateName": "World of Warships Collections Calc",
+                "url": "https://wowscollections.krstldv.com/"
+            },
+            {
+                "@type": "WebApplication",
+                "@id": "https://wowscollections.krstldv.com/#app",
+                "name": "Collections Calc",
+                "alternateName": "World of Warships Collection Calculator",
+                "description": "A free unofficial World of Warships collection calculator that estimates containers needed to complete collections while accounting for duplicate exchanges and optional resource costs.",
+                "url": "https://wowscollections.krstldv.com/",
+                "image": "https://wowscollections.krstldv.com/images/social-preview.png",
+                "operatingSystem": "Any web browser",
+                "applicationCategory": "GameApplication",
+                "isAccessibleForFree": true,
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "HeyKrystal"
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script>
+        (() => {
+            const storageKey = "wows-collections-theme";
+            const validPreferences = new Set(["system", "light", "dark"]);
+            let preference = "system";
+
+            try {
+                const saved = localStorage.getItem(storageKey);
+                if (validPreferences.has(saved)) {
+                    preference = saved;
+                }
+            } catch {
+                // localStorage may be unavailable in privacy-restricted contexts.
+            }
+
+            const useDark =
+                preference === "dark" ||
+                (preference === "system" &&
+                    window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+            const resolvedTheme = useDark ? "dark" : "light";
+            document.documentElement.dataset.theme = resolvedTheme;
+            document.documentElement.dataset.themePreference = preference;
+            document.querySelector('meta[name="theme-color"]')?.setAttribute(
+                "content",
+                resolvedTheme === "dark" ? "#0c1420" : "#edf4f8"
+            );
+        })();
+    </script>
+
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
-
 <body>
-    <main>
-        <div class="wide-layout">
-            <section class="card">
-                <header class="hero">
-                    <img src="images/app-icon.png" alt="World of Warships Collection Calculator" class="hero-icon">
+    <div class="page-background" aria-hidden="true"></div>
 
-                    <div class="hero-text">
-                        <h1>World of Warships Collection Calc</h1>
-                        <p>
-                            Estimate how many containers and resources are needed to complete a collection.
-                            <br>Calc is short for calculator; I'm just using slang guys.
-                        </p>
-                    </div>
-                </header>
-            </section>
-        </div>
+    <main class="page-shell">
+        <header class="hero panel">
+            <img src="images/app-icon.png" alt="" class="hero-icon" aria-hidden="true">
+            <div class="hero-copy">
+                <p class="eyebrow">World of Warships</p>
+                <h1>Collections Calc</h1>
+                <p class="hero-subtitle">
+                    Estimate how many containers you may need to finish a collection before committing Coal,
+                    Doubloons, Community Tokens, or time to the grind.
+                </p>
+            </div>
+        </header>
 
-        <div id="notice" class="notice">
-            <button id="dismissNotice" class="notice-close" type="button" aria-label="Dismiss notice">
-                ×
-            </button>
+        <details class="about-panel panel">
+            <summary>
+                <span>About &amp; Quick Start</span>
+                <small>How to use the calculator and read the estimate</small>
+            </summary>
+            <div class="about-content">
+                <section class="about-intro">
+                    <p class="section-kicker">Collections Calc</p>
+                    <h2>Estimate before you buy</h2>
+                    <p>
+                        This free, unofficial World of Warships collection calculator runs a Monte Carlo simulation
+                        to estimate how many containers a collection may take. It accounts for your current progress,
+                        duplicate exchange rate, saved collection tokens, and optional container cost.
+                    </p>
+                </section>
 
-            <ul>
-                <li>Keep in mind these are merely estimates intended to provide a general expected cost.
-                    <br>It is still recommended to acquire containers slowly up to the estimate to avoid
-                    over-purchasing.
-                </li>
-                <li>Calculator assumes you will save collection tokens until there are enough to finish the collection.
-                </li>
-            </ul>
-        </div>
+                <div class="about-grid">
+                    <section class="about-section" aria-labelledby="quickStartHeading">
+                        <h3 id="quickStartHeading">Quick Start</h3>
+                        <ol class="quick-start-list">
+                            <li>Search for a known collection, or enter its size and duplicate rate manually.</li>
+                            <li>Enter the elements, collection tokens, and duplicate progress you already have.</li>
+                            <li>Set the container details and optional cost, then choose <strong>Calculate Estimate</strong>.</li>
+                            <li>Use the expected range as a planning guide and acquire containers gradually.</li>
+                        </ol>
+                    </section>
 
-        <div class="layout">
-            <section class="card">
+                    <section class="about-section" aria-labelledby="rangeHeading">
+                        <h3 id="rangeHeading">Reading the Range</h3>
+                        <div class="range-guide">
+                            <div class="range-guide-item range-guide-typical">
+                                <span>Typical</span>
+                                <strong>50th percentile</strong>
+                                <small>Half of simulated runs finish by this point.</small>
+                            </div>
+                            <div class="range-guide-item range-guide-conservative">
+                                <span>Conservative</span>
+                                <strong>80th percentile</strong>
+                                <small>A higher planning target for less favorable luck.</small>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="about-note">
+                    <strong>How the estimate works:</strong>
+                    The calculator runs 500,000 simulated completions and assumes collection tokens are saved until
+                    enough have accumulated to finish the remaining collection. Container drops are random, so actual
+                    results can still fall outside the estimate.
+                </div>
+
+                <div class="about-note about-note-warning" role="note">
+                    <strong>Plan with the estimate, not against RNG.</strong>
+                    These values are forecasting tools, not guarantees. Acquire containers gradually when possible to
+                    avoid over-purchasing. The calculator assumes you save collection tokens until they can finish the collection.
+                </div>
+            </div>
+        </details>
+
+        <div class="calculator-layout">
+            <section class="panel input-panel" aria-labelledby="inputsHeading">
+                <div class="panel-heading">
+                    <p class="section-kicker">Your collection</p>
+                    <h2 id="inputsHeading">Collection Setup</h2>
+                    <p>Start with a collection template or enter the values manually.</p>
+                </div>
+
                 <form id="calculatorForm">
-                    <!-- Collection Details -->
-
-                    <section class="form-section">
-                        <h2 class="section-title">Collection Details</h2>
+                    <section class="form-section form-section-blue">
+                        <div class="form-section-heading">
+                            <span class="form-step">01</span>
+                            <div>
+                                <h3 class="section-title">Collection Details</h3>
+                                <p>Choose the collection and its exchange rules.</p>
+                            </div>
+                        </div>
 
                         <div class="field collection-field">
                             <label for="collectionSearch">
                                 Collection Name
                                 <span class="tooltip" tabindex="0"
-                                    data-tip="Search for a known collection, or leave blank to enter values manually.">
-                                    ?
-                                </span>
+                                    data-tip="Search for a known collection, or leave blank to enter values manually.">?</span>
                             </label>
-
                             <div class="combobox">
                                 <div class="combobox-control">
                                     <input id="collectionSearch" type="text" value="" placeholder="Search collections"
                                         autocomplete="off" role="combobox" aria-autocomplete="list"
                                         aria-expanded="false" aria-controls="collectionOptions"
                                         aria-activedescendant="">
-
                                     <button id="collectionToggle" class="combobox-toggle" type="button"
-                                        aria-label="Show collections" tabindex="-1">
-                                        ▾
-                                    </button>
+                                        aria-label="Show collections" tabindex="-1">▾</button>
                                 </div>
-
                                 <ul id="collectionOptions" class="combobox-options hidden" role="listbox"></ul>
                             </div>
                         </div>
@@ -102,8 +220,7 @@
                                     <span class="tooltip" tabindex="0"
                                         data-tip="Total number of elements in the collection.">?</span>
                                 </label>
-                                <input id="collectionSize" type="number" min="1" max="256" step="1" value="16"
-                                    required />
+                                <input id="collectionSize" type="number" min="1" max="256" step="1" value="16" required>
                             </div>
                             <div class="field">
                                 <label for="duplicateRate">
@@ -111,78 +228,90 @@
                                     <span class="tooltip" tabindex="0"
                                         data-tip="Number of duplicates required for a collection token.">?</span>
                                 </label>
-                                <input id="duplicateRate" type="number" min="1" step="1" value="4" required />
+                                <input id="duplicateRate" type="number" min="1" step="1" value="4" required>
                             </div>
                         </div>
                     </section>
 
-                    <!-- Collection Progress -->
-
-                    <section class="form-section">
-                        <h2 class="section-title">Collection Progress</h2>
-
-                        <div class="field">
-                            <label for="elementsCollected">
-                                Elements Collected
-                                <span class="tooltip" tabindex="0"
-                                    data-tip="Number of elements you already own.">?</span>
-                            </label>
-                            <input id="elementsCollected" type="number" min="0" max="256" step="1" value="0" required />
+                    <section class="form-section form-section-green">
+                        <div class="form-section-heading">
+                            <span class="form-step">02</span>
+                            <div>
+                                <h3 class="section-title">Collection Progress</h3>
+                                <p>Tell the calculator where you are starting.</p>
+                            </div>
                         </div>
 
-                        <div class="field">
-                            <label for="collectionTokens">
-                                Tokens Earned
-                                <span class="tooltip" tabindex="0"
-                                    data-tip="Number of collection tokens earned.">?</span>
-                            </label>
-                            <input id="collectionTokens" type="number" min="0" step="1" value="0" required />
-                        </div>
-
-                        <div class="field">
-                            <label for="duplicates">
-                                Duplicates Held
-                                <span class="tooltip" tabindex="0"
-                                    data-tip="Current duplicate progress towards earning next collection token.">?</span>
-                            </label>
-                            <input id="duplicates" type="number" min="0" step="1" value="0" required />
+                        <div class="field-row field-row-three">
+                            <div class="field">
+                                <label for="elementsCollected">
+                                    Elements Collected
+                                    <span class="tooltip" tabindex="0" data-tip="Number of elements you already own.">?</span>
+                                </label>
+                                <input id="elementsCollected" type="number" min="0" max="256" step="1" value="0" required>
+                            </div>
+                            <div class="field">
+                                <label for="collectionTokens">
+                                    Collection Tokens
+                                    <span class="tooltip" tabindex="0" data-tip="Number of collection tokens you currently have available.">?</span>
+                                </label>
+                                <input id="collectionTokens" type="number" min="0" step="1" value="0" required>
+                            </div>
+                            <div class="field">
+                                <label for="duplicates">
+                                    Duplicates Held
+                                    <span class="tooltip" tabindex="0"
+                                        data-tip="Current duplicate progress towards earning next collection token.">?</span>
+                                </label>
+                                <input id="duplicates" type="number" min="0" step="1" value="0" required>
+                            </div>
                         </div>
                     </section>
 
-                    <!-- Container Details -->
-
-                    <section class="form-section">
-                        <h2 class="section-title">Container Details</h2>
-
-                        <div class="field">
-                            <label for="isDaily">
-                                Daily Containers?
-                                <span class="tooltip" tabindex="0"
-                                    data-tip="Check this if the collection elements are acquired through daily/standard containers like with a subscription collection.">?</span>
-                            </label>
-                            <input id="isDaily" type="checkbox" />
+                    <section class="form-section form-section-orange">
+                        <div class="form-section-heading">
+                            <span class="form-step">03</span>
+                            <div>
+                                <h3 class="section-title">Container Details</h3>
+                                <p>Describe the containers you plan to acquire.</p>
+                            </div>
                         </div>
 
-                        <div class="field">
-                            <label for="elementsPerContainer">
-                                Elements Per Container
-                                <span class="tooltip" tabindex="0"
-                                    data-tip="How many collection elements each container grants. (Leave this set to one for daily/standard containers.)">?</span>
+                        <div class="daily-toggle-row">
+                            <div>
+                                <label for="isDaily" class="standalone-label">
+                                    Daily Containers?
+                                    <span class="tooltip" tabindex="0"
+                                        data-tip="Check this if collection elements are acquired through daily or standard containers like a subscription collection.">?</span>
+                                </label>
+                                <small>Uses the daily container collection-element drop behavior.</small>
+                            </div>
+                            <label class="switch-control" aria-label="Daily Containers">
+                                <input id="isDaily" type="checkbox">
+                                <span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span>
                             </label>
-                            <input id="elementsPerContainer" type="number" min="1" max="100" step="1" value="1"
-                                required />
                         </div>
 
-                        <div class="field">
-                            <label for="containerCost">
-                                Container Cost
-                                <span class="tooltip" tabindex="0"
-                                    data-tip="Optional cost per container. Leave blank for free/daily containers.">?</span>
-                            </label>
-
-                            <div class="cost-row">
-                                <input id="containerCost" type="number" min="0" step="1" placeholder="Optional" />
-                                <select id="currency">
+                        <div class="field-row container-fields">
+                            <div class="field">
+                                <label for="elementsPerContainer">
+                                    Elements / Container
+                                    <span class="tooltip" tabindex="0"
+                                        data-tip="How many collection elements each container grants. Leave this set to one for daily or standard containers.">?</span>
+                                </label>
+                                <input id="elementsPerContainer" type="number" min="1" max="100" step="1" value="1" required>
+                            </div>
+                            <div class="field">
+                                <label for="containerCost">
+                                    Container Cost
+                                    <span class="tooltip" tabindex="0"
+                                        data-tip="Optional cost per container. Leave blank for free or daily containers.">?</span>
+                                </label>
+                                <input id="containerCost" type="number" min="0" step="1" placeholder="Optional">
+                            </div>
+                            <div class="field">
+                                <label for="currency">Currency</label>
+                                <select id="currency" aria-label="Container currency">
                                     <option value="🪨">Coal 🪨</option>
                                     <option value="🪙">Doubloons 🪙</option>
                                     <option value="🔗">Community Tokens 🔗</option>
@@ -191,90 +320,123 @@
                         </div>
                     </section>
 
-                    <button id="calculateButton" class="primary-button" type="submit">Calculate Estimate</button>
-                    <div id="errorBox" class="error"></div>
+                    <button id="calculateButton" class="primary-button" type="submit">
+                        <span>Calculate Estimate</span>
+                        <span aria-hidden="true">→</span>
+                    </button>
+                    <div id="errorBox" class="error" role="alert"></div>
                 </form>
             </section>
 
-            <section class="card">
-                <h2>Estimates</h2>
+            <aside class="panel estimate-panel" aria-labelledby="estimatesHeading">
+                <div class="panel-heading estimate-heading">
+                    <p class="section-kicker">Forecast</p>
+                    <h2 id="estimatesHeading">Estimates</h2>
+                    <p>Use the expected range as the main planning number.</p>
+                </div>
 
-                <div id="results" class="results hidden">
-                    <div class="result-box">
-                        <div class="result-label">Expected Containers Needed</div>
-                        <div id="expectedRange" class="result-value primary">-</div>
-                        <div class="explanation">
-                            Most players will finish somewhere within this range.
-                            If your luck isn't that good, you may be closer to the higher number.
+                <div id="results" class="results hidden" aria-live="polite">
+                    <section class="expected-result">
+                        <div class="expected-result-topline">
+                            <span class="result-label">Expected Containers</span>
+                            <span class="result-badge">50th to 80th percentile</span>
                         </div>
-                    </div>
+                        <div id="expectedRange" class="result-value primary">-</div>
+                        <p class="explanation">
+                            A typical result starts at the lower number. The upper number is a more conservative target for less favorable luck.
+                        </p>
+                    </section>
 
-                    <div id="costBox" class="result-box cost-output">
-                        <div class="result-label">Expected Cost Range</div>
+                    <section id="costBox" class="cost-result cost-output">
+                        <span class="result-label">Expected Cost</span>
                         <div id="totalCost" class="result-value">-</div>
-                    </div>
+                    </section>
 
-                    <div class="small-stats">
-                        <div class="result-box">
-                            <div class="result-label">Very Lucky</div>
+                    <div class="luck-spectrum" aria-label="Lucky and unlucky reference estimates">
+                        <section class="luck-card lucky-card">
+                            <div class="luck-card-heading">
+                                <span class="luck-dot" aria-hidden="true"></span>
+                                <span>Very Lucky</span>
+                                <small>5th percentile</small>
+                            </div>
                             <div id="luckyContainers" class="result-value">-</div>
                             <div id="luckyCost" class="small-result-value cost-output">-</div>
-                            <div class="explanation">Only about 5% of players finish this early.</div>
-                        </div>
+                            <p class="explanation">Only about 5% of simulated players finish this early.</p>
+                        </section>
 
-                        <div class="result-box">
-                            <div class="result-label">Very Unlucky</div>
+                        <section class="luck-card unlucky-card">
+                            <div class="luck-card-heading">
+                                <span class="luck-dot" aria-hidden="true"></span>
+                                <span>Very Unlucky</span>
+                                <small>95th percentile</small>
+                            </div>
                             <div id="unluckyContainers" class="result-value">-</div>
                             <div id="unluckyCost" class="small-result-value cost-output">-</div>
-                            <div class="explanation">Only about 5% of players need more containers than this.</div>
-                        </div>
+                            <p class="explanation">Only about 5% of simulated players need more than this.</p>
+                        </section>
                     </div>
 
                     <details class="advanced-results">
-                        <summary>Extra Stats for Nerds</summary>
-
+                        <summary>
+                            <span>Extra Stats for Nerds</span>
+                            <small>Best, worst, average, and simulation details</small>
+                        </summary>
                         <div class="details-body">
-                            <div class="small-stats">
-
-                                <div class="result-box">
-                                    <div class="result-label">Best Case Scenario</div>
+                            <div class="advanced-grid">
+                                <section class="advanced-stat">
+                                    <span class="result-label">Best Case</span>
                                     <div id="bestCaseContainers" class="result-value">-</div>
                                     <div id="bestCaseCost" class="small-result-value cost-output">-</div>
-                                    <div class="explanation">If every pull is a missing element.</div>
-                                </div>
-
-                                <div class="result-box">
-                                    <div class="result-label">Worst Case Scenario</div>
+                                    <p class="explanation">Every pull is a missing element.</p>
+                                </section>
+                                <section class="advanced-stat">
+                                    <span class="result-label">Worst Case</span>
                                     <div id="worstCaseContainers" class="result-value">-</div>
                                     <div id="worstCaseCost" class="small-result-value cost-output">-</div>
-                                    <div class="explanation">If every remaining pull is a duplicate.</div>
-                                </div>
-
-                                <div class="result-box">
-                                    <div class="result-label">Average</div>
+                                    <p class="explanation">Every remaining pull is a duplicate.</p>
+                                </section>
+                                <section class="advanced-stat">
+                                    <span class="result-label">Average</span>
                                     <div id="averageContainers" class="result-value">-</div>
                                     <div id="averageCost" class="small-result-value cost-output">-</div>
-                                    <div class="explanation">Average containers needed.</div>
-                                </div>
+                                    <p class="explanation">Mean result across all simulations.</p>
+                                </section>
                             </div>
-
-                            <div class="explanation" id="summaryText"></div>
-                            <div class="explanation" id="simulationTime" style="font-size: 0.8rem; opacity: 0.8;"></div>
+                            <p class="simulation-summary" id="summaryText"></p>
+                            <p class="simulation-time" id="simulationTime"></p>
                         </div>
                     </details>
                 </div>
 
-                <div id="emptyState" class="explanation">
-                    Enter the collection details, then click Calculate Estimate.
+                <div id="emptyState" class="empty-state">
+                    <div class="empty-state-mark" aria-hidden="true">69%</div>
+                    <strong>Your estimate will land here.</strong>
+                    <p>Enter your collection details, then choose <strong>Calculate Estimate</strong>.</p>
                 </div>
-            </section>
+            </aside>
         </div>
 
-        <footer>
-            Made by HeyKrystal • Open Source on GitHub
+        <footer class="site-footer">
+            <div class="footer-copy">
+                <span>Made by HeyKrystal</span>
+                <span aria-hidden="true">•</span>
+                <span>Not affiliated with Wargaming</span>
+                <span aria-hidden="true">•</span>
+                <a href="https://github.com/HeyKrystal/wows-collection-calc" target="_blank" rel="noopener noreferrer">Open Source on GitHub</a>
+            </div>
+
+            <div class="theme-control" aria-label="Theme preference">
+                <span class="theme-label">Theme</span>
+                <div class="theme-options" role="group" aria-label="Choose a color theme">
+                    <button type="button" data-theme-choice="system" aria-pressed="false">System</button>
+                    <button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+                    <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+                </div>
+            </div>
         </footer>
     </main>
+
+    <script type="module" src="src/theme.js"></script>
     <script type="module" src="src/ui.js"></script>
 </body>
-
 </html>

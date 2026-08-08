@@ -10,7 +10,6 @@
   VERY_LUCKY_PERCENTILE:
     Very lucky container value.
     5 means "5 out of 100 simulated players finished by this many containers."
-
   TYPICAL_PERCENTILE:
     Lower end of the displayed Expected Containers range.
     50 means "half of simulated players finished by this many containers."
@@ -22,7 +21,6 @@
   VERY_UNLUCKY_PERCENTILE:
     Very unlucky container value.
     95 means "95 out of 100 simulated players finished by this many containers."
-
   MAX_COLLECTION_SIZE:
     Prevents users from entering huge collection sizes that could make the calculator sluggish.
 
@@ -35,7 +33,6 @@
 */
 export const CONSTANTS = {
     SIMULATION_COUNT: 500000,
-
     VERY_LUCKY_PERCENTILE: 5,
     TYPICAL_PERCENTILE: 50,
     CONSERVATIVE_PERCENTILE: 80,
@@ -56,7 +53,6 @@ export function runSimulation(config) {
     }
 
     results.sort((a, b) => a - b);
-
     const sum = results.reduce((total, value) => total + value, 0);
 
     return {
@@ -69,7 +65,6 @@ export function runSimulation(config) {
         average: sum / results.length
     };
 }
-
 export function normalizeStartingTokens(tokens, duplicates, duplicateRate) {
     const extraTokens = Math.floor(duplicates / duplicateRate);
 
@@ -78,7 +73,6 @@ export function normalizeStartingTokens(tokens, duplicates, duplicateRate) {
         duplicates: duplicates % duplicateRate
     };
 }
-
 export function validateConfig(config) {
     if (!Number.isInteger(config.collectionSize) || config.collectionSize < 1 || config.collectionSize > CONSTANTS.MAX_COLLECTION_SIZE) {
         return `Collection Size must be between 1 and ${CONSTANTS.MAX_COLLECTION_SIZE}.`;
@@ -87,7 +81,6 @@ export function validateConfig(config) {
     if (!Number.isInteger(config.elementsCollected) || config.elementsCollected < 0 || config.elementsCollected > config.collectionSize) {
         return "Elements Collected must be between 0 and Collection Size.";
     }
-
     if (!Number.isInteger(config.collectionTokens) || config.collectionTokens < 0) {
         return "Collection Tokens must be 0 or higher.";
     }
@@ -95,7 +88,6 @@ export function validateConfig(config) {
     if (!Number.isInteger(config.duplicateRate) || config.duplicateRate < 1 || config.duplicateRate > CONSTANTS.MAX_DUPLICATE_RATE) {
         return `Duplicate Rate must be between 1 and ${CONSTANTS.MAX_DUPLICATE_RATE}.`;
     }
-
     if (!Number.isInteger(config.duplicates) || config.duplicates < 0 || config.duplicates >= config.duplicateRate) {
         return "Duplicates must be greater than 0 and less that the Duplicate Exchange Rate.";
     }
@@ -106,7 +98,6 @@ export function validateConfig(config) {
 
     return "";
 }
-
 function simulateOneRun(config) {
     let owned = config.elementsCollected;
     let tokens = config.collectionTokens;
@@ -119,7 +110,6 @@ function simulateOneRun(config) {
         if (config.isDaily && Math.random() >= CONSTANTS.ELEMENT_CHANCE_IN_DAILY) {
             continue;
         }
-
         for (let i = 0; i < config.elementsPerContainer; i++) {
             if (canFinish(config.collectionSize, owned, tokens)) {
                 break;
@@ -132,7 +122,6 @@ function simulateOneRun(config) {
                 owned++;
             } else {
                 duplicates++;
-
                 if (duplicates >= config.duplicateRate) {
                     const newTokens = Math.floor(duplicates / config.duplicateRate);
                     tokens += newTokens;
@@ -144,7 +133,6 @@ function simulateOneRun(config) {
 
     return containers;
 }
-
 function percentile(sortedValues, percent) {
     const index = Math.ceil((percent / 100) * sortedValues.length) - 1;
     return sortedValues[Math.max(0, Math.min(index, sortedValues.length - 1))];
@@ -160,7 +148,6 @@ function calculateBestCase(config) {
         0,
         config.collectionSize - config.elementsCollected - config.collectionTokens
     );
-
     return Math.ceil(missing / config.elementsPerContainer);
 }
 
@@ -175,6 +162,5 @@ function calculateWorstCase(config) {
         0,
         (tokensStillNeeded * config.duplicateRate) - config.duplicates
     );
-
     return Math.ceil(duplicateItemsNeeded / config.elementsPerContainer);
 }

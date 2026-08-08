@@ -12,7 +12,6 @@ export async function loadCollections() {
     const collections = Array.isArray(data)
         ? data
         : data.collections;
-
     if (!Array.isArray(collections)) {
         throw new Error(
             "Collection data does not contain a collections array."
@@ -27,7 +26,6 @@ export async function loadCollections() {
             })
         );
 }
-
 function isValidCollection(collection) {
     return (
         collection &&
