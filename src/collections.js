@@ -1,17 +1,11 @@
+import { CONFIG } from "./config.js";
+
 export async function loadCollections() {
-    const response = await fetch("./data/collections.json");
-
-    if (!response.ok) {
-        throw new Error(
-            `Could not load collection data: HTTP ${response.status}`
-        );
-    }
-
-    const data = await response.json();
-
+    const data = await loadCollectionData();
     const collections = Array.isArray(data)
         ? data
         : data.collections;
+
     if (!Array.isArray(collections)) {
         throw new Error(
             "Collection data does not contain a collections array."
@@ -26,6 +20,61 @@ export async function loadCollections() {
             })
         );
 }
+
+async function loadCollectionData() {
+    const errors = [];
+
+    for (const url of CONFIG.collectionData.urls) {
+        try {
+            return await fetchJson(
+                url,
+                CONFIG.collectionData.requestTimeoutMs
+            );
+        } catch (error) {
+            errors.push(`${url}: ${error.message}`);
+            console.warn(
+                `Could not load collection data from ${url}.`,
+                error
+            );
+        }
+    }
+
+    throw new Error(
+        "Could not load collection data from any configured source. " +
+        errors.join(" | ")
+    );
+}
+
+async function fetchJson(url, timeoutMs) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(
+        () => controller.abort(),
+        timeoutMs
+    );
+
+    try {
+        const response = await fetch(url, {
+            signal: controller.signal
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        if (error.name === "AbortError") {
+            throw new Error(
+                `Request timed out after ${timeoutMs} ms`
+            );
+        }
+
+        throw error;
+    } finally {
+        clearTimeout(timeoutId);
+    }
+}
+
 function isValidCollection(collection) {
     return (
         collection &&
