@@ -29,6 +29,7 @@
     gap: 8px;
 
     max-width: calc(100% - 8px);
+    transform: translateY(-2px);
 }
 
 /*
