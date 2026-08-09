@@ -68,6 +68,16 @@ Collection information is automatically updated from the Wargaming API and is ma
 
 No API key is required to use the calculator.
 
+## Wargaming Assets
+
+This application uses World of Warships game data and displays some Wargaming-owned artwork and icons.
+
+World of Warships, related trademarks, and Wargaming-owned artwork remain the property of Wargaming. Those assets are **not covered by this repository's MIT license**. The MIT license applies only to the original code and other material I own.
+
+This is an unofficial fan project and is not affiliated with, endorsed by, or supported by Wargaming.
+
+Shared game data and static Wargaming artwork are maintained through the [wows-shared-data](https://github.com/HeyKrystal/wows-shared-data) repository.
+
 ## Issues
 This is primarily a personal project. If there are obviously valid problems or issues with the calculations, feel free to open an issue and I will try my best to get to it.
 However, requests that border enhancements or conveniences will be a stretch for me. I just don't have a lot of time for that.
