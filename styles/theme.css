@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Theme Tokens
+   --------------------------------------------------------------------------
+   Shared visual variables for light and dark modes.
+
+   theme.js changes the data-theme attribute on <html>. All other stylesheets
+   consume these variables, so components automatically follow the active
+   theme without needing their own light/dark selectors.
+   ========================================================================== */
+
+:root {
+    color-scheme: light;
+
+    --page-bg: #edf4f8;
+    --page-bg-deep: #dce9f1;
+    --page-glow-blue: rgba(25, 170, 230, 0.19);
+    --page-glow-orange: rgba(255, 132, 37, 0.17);
+    --page-texture-opacity: 0.05;
+
+    --panel: rgba(250, 253, 255, 0.92);
+    --panel-solid: #f9fcfe;
+    --panel-soft: rgba(233, 243, 249, 0.82);
+    --panel-raised: rgba(255, 255, 255, 0.96);
+    --surface-hover: rgba(216, 235, 245, 0.76);
+
+    --text: #1a2a38;
+    --heading: #102131;
+    --muted: #607486;
+    --muted-strong: #40586b;
+    --border: rgba(38, 75, 101, 0.18);
+    --border-strong: rgba(36, 84, 116, 0.3);
+
+    --blue: #087fbc;
+    --blue-bright: #0da7e8;
+    --blue-soft: rgba(13, 167, 232, 0.12);
+    --orange: #e86d16;
+    --orange-bright: #ff8a24;
+    --orange-soft: rgba(255, 138, 36, 0.13);
+    --green: #228f62;
+    --green-bright: #31ae78;
+    --green-soft: rgba(49, 174, 120, 0.13);
+    --red: #c94b4b;
+    --red-soft: rgba(201, 75, 75, 0.11);
+
+    --input-bg: rgba(255, 255, 255, 0.86);
+    --input-border: rgba(32, 72, 100, 0.23);
+    --focus-ring: rgba(13, 167, 232, 0.32);
+    --selection: rgba(13, 167, 232, 0.19);
+
+    --shadow-panel: 0 18px 48px rgba(25, 62, 87, 0.10);
+    --shadow-soft: 0 8px 24px rgba(30, 64, 88, 0.08);
+    --shadow-button: 0 10px 24px rgba(0, 127, 188, 0.22);
+
+    --radius-panel: 16px;
+    --radius-card: 12px;
+    --radius-control: 9px;
+    --page-width: 1160px;
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --page-bg: #0c1420;
+    --page-bg-deep: #07101a;
+    --page-glow-blue: rgba(0, 166, 231, 0.16);
+    --page-glow-orange: rgba(255, 126, 29, 0.12);
+    --page-texture-opacity: 0.02;
+
+    --panel: rgba(19, 31, 45, 0.91);
+    --panel-solid: #142231;
+    --panel-soft: rgba(31, 48, 64, 0.73);
+    --panel-raised: rgba(24, 39, 55, 0.97);
+    --surface-hover: rgba(44, 64, 81, 0.86);
+
+    --text: #e9f1f6;
+    --heading: #f6fafc;
+    --muted: #9eb0bd;
+    --muted-strong: #c0ccd4;
+    --border: rgba(171, 204, 225, 0.14);
+    --border-strong: rgba(173, 213, 235, 0.25);
+
+    --blue: #38bdf8;
+    --blue-bright: #57ccff;
+    --blue-soft: rgba(56, 189, 248, 0.13);
+    --orange: #fb8b3d;
+    --orange-bright: #ffa45f;
+    --orange-soft: rgba(251, 139, 61, 0.13);
+    --green: #43c98b;
+    --green-bright: #64dda3;
+    --green-soft: rgba(67, 201, 139, 0.13);
+    --red: #ff7a7a;
+    --red-soft: rgba(255, 122, 122, 0.11);
+
+    --input-bg: rgba(8, 18, 29, 0.72);
+    --input-border: rgba(178, 208, 226, 0.18);
+    --focus-ring: rgba(56, 189, 248, 0.34);
+    --selection: rgba(56, 189, 248, 0.22);
+
+    --shadow-panel: 0 20px 54px rgba(0, 0, 0, 0.25);
+    --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.18);
+    --shadow-button: 0 10px 28px rgba(24, 174, 235, 0.18);
+}

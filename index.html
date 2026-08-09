@@ -103,7 +103,10 @@
         })();
     </script>
 
+    <link rel="stylesheet" href="styles/theme.css">
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/tool-tabs.css">
 </head>
 
 <body>
@@ -117,7 +120,7 @@
                 <h1>Collections Calc</h1>
                 <p class="hero-subtitle">
                     Estimate how many containers you may need to finish a collection before committing Coal,
-                    Doubloons, Community Tokens, or time to the grind. Calc is short for calculator; I'm 
+                    Doubloons, Community Tokens, or time to the grind. Calc is short for calculator; I'm
                     just using slang guys.
                 </p>
             </div>
@@ -177,16 +180,16 @@
 
                 <div class="about-note">
                     <strong>How the estimate works:</strong>
-                    The calculator runs 500,000 simulated collection completions and assumes collection tokens are saved until
-                    enough have accumulated to finish the remaining collection. Container drops are random, so actual
-                    results can still fall outside the estimate.
+                    The calculator runs 500,000 simulated collection completions and assumes collection tokens are saved
+                    until enough have accumulated to finish the remaining collection. Container drops are random, so
+                    actual results can still fall outside the estimate.
                 </div>
 
                 <div class="about-note about-note-warning" role="note">
                     <strong>Plan with the estimate, not against RNG.</strong>
                     These values are forecasting tools, not guarantees. Acquire containers gradually when possible to
-                    avoid over-purchasing. The calculator assumes you will save collection tokens until there are enought
-                    to finish the collection.
+                    avoid over-purchasing. The calculator assumes you will save collection tokens until there are
+                    enough to finish the collection.
                 </div>
             </div>
         </details>
@@ -442,6 +445,24 @@
         </div>
 
         <footer class="site-footer">
+            <nav class="tool-dock" aria-label="Other World of Warships tools">
+
+                <span class="tool-dock-label">
+                    Other WoWs tools &#8250;
+                </span>
+                <a class="tool-tab" href="https://convoy.krstldv.com/" aria-label="Open Holiday Convoy">
+                    <div class="tool-tab-title">
+                        <img class="tool-tab-icon" src="https://raw.githubusercontent.com/HeyKrystal/wows-holiday-convoy-forecast/refs/heads/main/images/app-icon.png" alt="">
+                        <span>Holiday Convoy Forecast</span>
+                    </div>
+
+                    <p class="tool-tab-description">
+                        Estimate Convoy tokens & compare reward costs for the WoWs 2026
+                        Holiday Convoy event.
+                    </p>
+                </a>
+            </nav>
+
             <div class="footer-copy">
                 <span>Made by HeyKrystal</span>
                 <span aria-hidden="true">•</span>
