@@ -11,8 +11,6 @@ const form = document.getElementById("calculatorForm");
 const errorBox = document.getElementById("errorBox");
 const results = document.getElementById("results");
 const emptyState = document.getElementById("emptyState");
-const notice = document.getElementById("notice");
-const dismissNotice = document.getElementById("dismissNotice");
 const collectionSearch = document.getElementById("collectionSearch");
 const collectionToggle = document.getElementById("collectionToggle");
 const collectionOptions = document.getElementById("collectionOptions");
@@ -25,11 +23,6 @@ let activeOptionIndex = -1;
 
 initializeCollectionCombobox();
 
-if (notice && dismissNotice) {
-    dismissNotice.addEventListener("click", () => {
-        notice.classList.add("dismissed");
-    });
-}
 
 function showError(message) {
     errorBox.textContent = message;
