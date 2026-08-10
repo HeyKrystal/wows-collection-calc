@@ -37,7 +37,7 @@
     <meta name="twitter:image" content="https://collections.krstldv.com/images/social-preview.png">
     <meta name="twitter:image:alt" content="Collections Calc, a World of Warships collection container estimator">
 
-    <script type="application/ld+json">
+    <script id="collections-calc-structured-data" type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@graph": [
@@ -45,8 +45,10 @@
                 "@type": "WebSite",
                 "@id": "https://collections.krstldv.com/#website",
                 "name": "Collections Calc",
-                "alternateName": "Collections Calc | World of Warships Collection Calculator",
-                "alternateName": "World of Warships Collection Calculator",
+                "alternateName": [
+                    "Collections Calc | World of Warships Collection Calculator",
+                    "World of Warships Collection Calculator"
+                ],
                 "url": "https://collections.krstldv.com/"
             },
             {
@@ -57,8 +59,9 @@
                 "description": "Free unofficial World of Warships collection calculator. Estimate how many containers you may need to complete a collection in World of Warships, including duplicate exchanges and resource costs.",
                 "url": "https://collections.krstldv.com/",
                 "image": "https://collections.krstldv.com/images/social-preview.png",
-                "operatingSystem": "Any web browser",
-                "applicationCategory": "GameApplication",
+                "applicationCategory": "UtilitiesApplication",
+                "operatingSystem": "Any",
+                "browserRequirements": "Requires JavaScript and a modern web browser.",
                 "isAccessibleForFree": true,
                 "offers": {
                     "@type": "Offer",
@@ -67,8 +70,11 @@
                 },
                 "author": {
                     "@type": "Person",
-                    "name": "HeyKrystal"
-                }
+                    "name": "HeyKrystal",
+                    "url": "https://github.com/HeyKrystal"
+                },
+                "sameAs": "https://github.com/HeyKrystal/wows-collection-calc",
+                "inLanguage": "en-US"
             }
         ]
     }
