@@ -7,7 +7,7 @@ export const CONFIG = {
      */
     collectionData: {
         urls: [
-            "https://heykrystal.github.io/wows-shared-data/v1/collections.json",
+            "https://heykrystal.github.io/wows-shared-data/public/v1/collections.json",
             "https://raw.githubusercontent.com/HeyKrystal/wows-shared-data/main/public/v1/collections.json"
         ],
         requestTimeoutMs: 8000
